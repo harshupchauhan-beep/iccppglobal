@@ -1,0 +1,85 @@
+{
+  "issues": [
+    {
+      "id": "j09",
+      "number": "09",
+      "label": "Nr. 09 - September 2023",
+      "cover": "assets/photos/journals/nr-09.jpg",
+      "file": "",
+      "url": "https://www.iccpp.org/iccpp-journal-09-content-2/?lang=en",
+      "visible": true
+    },
+    {
+      "id": "j08",
+      "number": "08",
+      "label": "Nr. 08 - May 2023",
+      "cover": "",
+      "file": "",
+      "url": "https://www.iccpp.org/iccpp-journal-08-content/?lang=en",
+      "visible": true
+    },
+    {
+      "id": "j07",
+      "number": "07",
+      "label": "Nr. 07 - January 2023",
+      "cover": "",
+      "file": "",
+      "url": "https://www.iccpp.org/iccpp-journal-07-content/?lang=en",
+      "visible": true
+    },
+    {
+      "id": "j06",
+      "number": "06",
+      "label": "Nr. 06 - September 2022",
+      "cover": "",
+      "file": "",
+      "url": "https://www.iccpp.org/iccpp-journal-06-content/?lang=en",
+      "visible": true
+    },
+    {
+      "id": "j05",
+      "number": "05",
+      "label": "Nr. 05 - May 2022",
+      "cover": "",
+      "file": "",
+      "url": "https://www.iccpp.org/iccpp-journal-05-content/?lang=en",
+      "visible": true
+    },
+    {
+      "id": "j04",
+      "number": "04",
+      "label": "Nr. 04 - January 2022",
+      "cover": "",
+      "file": "",
+      "url": "https://www.iccpp.org/iccpp-journal-04-content/?lang=en",
+      "visible": true
+    },
+    {
+      "id": "j03",
+      "number": "03",
+      "label": "Nr. 03 - September 2021",
+      "cover": "",
+      "file": "",
+      "url": "https://www.iccpp.org/iccpp-journal-03-content/?lang=en",
+      "visible": true
+    },
+    {
+      "id": "j02",
+      "number": "02",
+      "label": "Nr. 02 - May 2021",
+      "cover": "",
+      "file": "",
+      "url": "https://www.iccpp.org/iccpp-journal-02-content/?lang=en",
+      "visible": true
+    },
+    {
+      "id": "j01",
+      "number": "01",
+      "label": "Nr. 01 - January 2021",
+      "cover": "",
+      "file": "",
+      "url": "https://www.iccpp.org/iccpp-journal-01-content/?lang=en",
+      "visible": true
+    }
+  ]
+}

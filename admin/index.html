@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Admin — ICCPP</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700&family=Source+Serif+4:opsz,wght@8..60,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/admin/css/admin.css">
+</head>
+<body>
+  <div class="shell">
+    <aside class="side">
+      <a class="brand" href="#/">ICCPP admin</a>
+      <nav>
+        <a href="#/" data-nav="dashboard">Dashboard</a>
+        <a href="#/inbox" data-nav="inbox">Inbox</a>
+        <a href="#/news" data-nav="news">Homepage news</a>
+        <a href="#/members" data-nav="members">Members</a>
+        <a href="#/partners" data-nav="partners">Partners</a>
+        <a href="#/internships" data-nav="internships">Internships</a>
+        <a href="#/journals" data-nav="journals">Journals</a>
+      </nav>
+      <p class="meta" id="who"></p>
+      <p class="meta"><a href="/" target="_blank" rel="noopener">Open public site</a></p>
+      <p class="meta"><button class="btn btn-ghost btn-small" type="button" id="logout">Sign out</button></p>
+    </aside>
+    <div class="main">
+      <div class="top">
+        <div>
+          <h1 id="title">Dashboard</h1>
+          <p class="muted" id="subtitle">New messages and a snapshot of Centre content.</p>
+        </div>
+      </div>
+      <div id="view"></div>
+    </div>
+  </div>
+  <script src="/admin/js/admin.js"></script>
+</body>
+</html>

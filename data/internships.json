@@ -1,0 +1,22 @@
+{
+  "open": true,
+  "facts": [
+    {"value": "45 days / 240 hours", "label": "Duration"},
+    {"value": "Sponsored", "label": "For ICCPP student members"},
+    {"value": "Online", "label": "Mode of internship"}
+  ],
+  "coursework": [
+    "Guest lectures by eminent personalities in the field of Psychology and Psychiatry",
+    "Case history taking",
+    "Mental Status Examination",
+    "Interviewing patients",
+    "Assessment and diagnosis – Prof. Dr. Hans-Werner Gessmann",
+    "Administration of psychological tests – Prof. Dr. Hans-Werner Gessmann",
+    "Scoring and interpretation of test results and arriving at a correct diagnosis of the problem",
+    "Providing individual and group psychotherapy",
+    "Behavioral treatment",
+    "Working with an interdisciplinary treatment team",
+    "Assistance in internship report writing",
+    "Regular assigments to assess the level of understanding of students and doubt solving sessions"
+  ]
+}

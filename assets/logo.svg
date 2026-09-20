@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" role="img" aria-labelledby="logoTitle">
+  <title id="logoTitle">ICCPP</title>
+  <circle cx="60" cy="60" r="56" fill="none" stroke="#0B1F3A" stroke-width="2.2"/>
+  <ellipse cx="60" cy="60" rx="22" ry="56" fill="none" stroke="#0B1F3A" stroke-width="1.15"/>
+  <ellipse cx="60" cy="60" rx="40" ry="56" fill="none" stroke="#0B1F3A" stroke-width="1.15"/>
+  <ellipse cx="60" cy="60" rx="56" ry="22" fill="none" stroke="#0B1F3A" stroke-width="1.15"/>
+  <ellipse cx="60" cy="60" rx="56" ry="40" fill="none" stroke="#0B1F3A" stroke-width="1.15"/>
+  <line x1="4" y1="60" x2="116" y2="60" stroke="#0B1F3A" stroke-width="1.15"/>
+  <line x1="60" y1="4" x2="60" y2="116" stroke="#0B1F3A" stroke-width="1.15"/>
+  <path fill="#8E1C2F" d="M38 28c0 14.5 8.2 24.5 22 26.8V92h8V54.8C82 52.5 90 42.5 90 28h-8c0 11.2-6.4 19.5-22 21.4C44.4 47.5 38 39.2 38 28z"/>
+</svg>

@@ -1,0 +1,1982 @@
+{
+  "leadership": [
+    {
+      "id": "l1",
+      "name": "Prof. Prof. h.c. Dr. Hans-Werner Gessmann",
+      "initials": "HG",
+      "bio": "Founder and Director of ICCPP. Cooperating professor at Krasnoyarsk State Medical University; founder of the Psychotherapeutic Institute Bergerhausen. Born in Duisburg in 1950. Died 3 October 2023.",
+      "email": "",
+      "alt": false,
+      "visible": true,
+      "photo": "assets/photos/members/hans-werner-gessmann.jpg",
+      "profile": "members/hans-werner-gessmann.html"
+    },
+    {
+      "id": "l2",
+      "name": "Vishal Lohchab",
+      "initials": "VL",
+      "bio": "Director of ICCPP. Former scientific associate to Professor Gessmann. Responsible for operations, activities, and global initiatives of the Centre.",
+      "email": "iccppgermany@gmail.com",
+      "alt": true,
+      "visible": true,
+      "photo": "assets/photos/members/vishal-lohchab.jpg"
+    }
+  ],
+  "directory": [
+    {
+      "id": "d1",
+      "name": "Prof. Prof. h.c. Dr. Hans-Werner Gessmann",
+      "role": "Director of the centre · Germany",
+      "group": "management",
+      "visible": true,
+      "photo": "assets/photos/members/hans-werner-gessmann.jpg",
+      "profile": "members/hans-werner-gessmann.html"
+    },
+    {
+      "id": "d2",
+      "name": "Vishal Lohchab",
+      "role": "Director · M.A. Clinical Psychology · India",
+      "group": "management",
+      "visible": true,
+      "photo": "assets/photos/members/vishal-lohchab.jpg"
+    },
+    {
+      "id": "d3",
+      "name": "Dipl. Germ. Elena Simova",
+      "role": "Research assistant · Russia",
+      "group": "management",
+      "visible": true,
+      "photo": "assets/photos/members/dipl-germ-elena-simova.jpg"
+    },
+    {
+      "id": "d4",
+      "name": "Dipl. Psych. Daria Tzareva",
+      "role": "Sexologist – consultant · Russia",
+      "group": "management",
+      "visible": true,
+      "photo": "assets/photos/members/dipl-psych-daria-tzareva.jpg"
+    },
+    {
+      "id": "d5",
+      "name": "MA Psych. Hanna K. Hilbig",
+      "role": "Research assistant · Germany",
+      "group": "management",
+      "visible": true,
+      "photo": "assets/photos/members/ma-psych-hanna-k-hilbig.jpg"
+    },
+    {
+      "id": "d6",
+      "name": "Dipl. Päd. Monika Stettner-Dominik",
+      "role": "Educational director · Germany",
+      "group": "management",
+      "visible": true,
+      "photo": "assets/photos/members/dipl-pad-monika-stettner-dominik.jpg"
+    },
+    {
+      "id": "d7",
+      "name": "Ina Wohlgemuth",
+      "role": "Research assistant, graduated psychologist · Germany",
+      "group": "management",
+      "visible": true
+    },
+    {
+      "id": "d8",
+      "name": "Dr. Mohamed Yasir Arafath",
+      "role": "ICCPP ambassador India / Africa · MSW MPhil. PGDC PhD.",
+      "group": "management",
+      "visible": true,
+      "photo": "assets/photos/members/dr-mohamed-yasir-arafath.jpg"
+    },
+    {
+      "id": "d9",
+      "name": "Daria Tzareva",
+      "role": "Dipl. Psych. · Russia",
+      "group": "phd",
+      "visible": true,
+      "photo": "assets/photos/members/daria-tzareva.jpg"
+    },
+    {
+      "id": "d10",
+      "name": "Elke van Dam-Kusch",
+      "role": "Dipl. Math. · Germany",
+      "group": "phd",
+      "visible": true,
+      "photo": "assets/photos/members/elke-van-dam-kusch.jpg"
+    },
+    {
+      "id": "d11",
+      "name": "Isabel Härtl",
+      "role": "Lawyer · Germany",
+      "group": "phd",
+      "visible": true,
+      "photo": "assets/photos/members/isabel-hartl.jpg"
+    },
+    {
+      "id": "d12",
+      "name": "Elwira Blazewicz",
+      "role": "MA Hist. / BA family therapy · Poland – Germany",
+      "group": "phd",
+      "visible": true,
+      "photo": "assets/photos/members/elwira-blazewicz-2.jpg"
+    },
+    {
+      "id": "d13",
+      "name": "Frank Wagner",
+      "role": "Dipl. Soz. Arb. · Germany",
+      "group": "phd",
+      "visible": true,
+      "photo": "assets/photos/members/frank-wagner.jpg"
+    },
+    {
+      "id": "d14",
+      "name": "Prof. Dr. mult. Kurt Guss",
+      "role": "Graduate psychologist · Germany",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/prof-dr-mult-kurt-guss.jpg"
+    },
+    {
+      "id": "d15",
+      "name": "Prof. Dr. Olesya Volkova",
+      "role": "Graduate psychologist · Russia",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/prof-dr-olesya-volkova.jpg"
+    },
+    {
+      "id": "d16",
+      "name": "Prof. Dr. Ertuğrul Köroğlu",
+      "role": "Chief physician, psychiatry · Turkey",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/prof-dr-ertugrul-koroglu.jpg"
+    },
+    {
+      "id": "d17",
+      "name": "Prof. Dr. Suresh Kumar Murugesan",
+      "role": "Graduate psychologist · India",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/prof-dr-suresh-kumar-murugesan.jpg"
+    },
+    {
+      "id": "d18",
+      "name": "Prof. Dr. Rimma Chirkina",
+      "role": "Graduate psychologist · Russia",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/prof-dr-rimma-chirkina.jpg"
+    },
+    {
+      "id": "d19",
+      "name": "Prof. Dr. Kadhiravan Subramanian",
+      "role": "Graduate psychologist · India",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/prof-dr-kadhiravan-subramanian.jpg"
+    },
+    {
+      "id": "d20",
+      "name": "Hülya Bauer",
+      "role": "Internist, nephrology · Germany",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/hulya-bauer.jpg"
+    },
+    {
+      "id": "d21",
+      "name": "Ass. Prof. Dr. cand. Mebin Wilson Thomas",
+      "role": "Graduate social scientist · India",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/ass-prof-dr-cand-mebin-wilson-thomas.jpg"
+    },
+    {
+      "id": "d22",
+      "name": "Ass. Prof. Dr. N.P. Veenavani",
+      "role": "MSc psychologist · India",
+      "group": "lecturers",
+      "visible": true
+    },
+    {
+      "id": "d23",
+      "name": "Ass. Prof. Dr. Maharishi Ranganathan",
+      "role": "MSc, MPhil clinical psychologist · India",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/ass-prof-dr-maharishi-ranganathan.jpg"
+    },
+    {
+      "id": "d24",
+      "name": "Ass. Prof. Dr. J. Prakash Jagadeesan",
+      "role": "MA, MSc, MEd, MSW · India",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/ass-prof-dr-j-prakash-jagadeesan.jpg"
+    },
+    {
+      "id": "d25",
+      "name": "Ass. Prof. Dr. Mohammad Rahim Kamaluddin",
+      "role": "BSc, PhD criminology · India",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/ass-prof-dr-mohammad-rahim-kamaluddin.jpg"
+    },
+    {
+      "id": "d26",
+      "name": "Maria Marta Schmitz",
+      "role": "Psychodrama teaching therapist · Germany",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/maria-marta-schmitz.png"
+    },
+    {
+      "id": "d27",
+      "name": "Anne Grüner",
+      "role": "MA Psy, MSc counselling · India / Germany",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/anne-gruner-2.jpg"
+    },
+    {
+      "id": "d28",
+      "name": "Bipin Parajuli",
+      "role": "Social worker · Nepal",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/bipin-parajuli-2.jpg"
+    },
+    {
+      "id": "d29",
+      "name": "Evgeny Sheronov",
+      "role": "Graduate psychologist · Russia",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/evgeny-sheronov-2.jpg"
+    },
+    {
+      "id": "d30",
+      "name": "Shahid Farzeen",
+      "role": "India",
+      "group": "lecturers",
+      "visible": true
+    },
+    {
+      "id": "d31",
+      "name": "Aytac Məmmədova",
+      "role": "Graduate psychologist · Azerbaijan",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/aytac-m-mm-dova.jpg"
+    },
+    {
+      "id": "d32",
+      "name": "Amar Kamble",
+      "role": "Graduate pharmacist · India",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/amar-kamble.jpg"
+    },
+    {
+      "id": "d33",
+      "name": "Ass. Prof. Saadhvi Nirmal",
+      "role": "MSc BSc MPhil · India",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/ass-prof-saadhvi-nirmal.jpg"
+    },
+    {
+      "id": "d34",
+      "name": "Yunlong Pei",
+      "role": "Software engineer · China",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/yunlong-pei.jpg"
+    },
+    {
+      "id": "d35",
+      "name": "Monika Hackenberg",
+      "role": "Graduate computer scientist · Austria",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/monika-hackenberg.jpg"
+    },
+    {
+      "id": "d36",
+      "name": "Mahizar Zeynalova",
+      "role": "Graduate psychologist · Azerbaijan",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/mahizar-zeynalova.jpg"
+    },
+    {
+      "id": "d37",
+      "name": "Axana Getzlaff",
+      "role": "Graduate social worker · Russia – Germany",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/axana-getzlaff.jpg"
+    },
+    {
+      "id": "d38",
+      "name": "Tushar Kazi",
+      "role": "Translator Bengali · Bangladesh – USA",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/tushar-kazi.jpg"
+    },
+    {
+      "id": "d39",
+      "name": "Natalia Zelenova",
+      "role": "Graduate psychologist · Russia – Germany",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/natalia-zelenova.jpg"
+    },
+    {
+      "id": "d40",
+      "name": "Dr. Kinga Gajda",
+      "role": "Ass. Professor · Poland",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/dr-kinga-gajda.jpg"
+    },
+    {
+      "id": "d41",
+      "name": "Ulrike Struck",
+      "role": "Child psychotherapist · Germany",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/ulrike-struck.jpg"
+    },
+    {
+      "id": "d42",
+      "name": "Javokhir Nazarov",
+      "role": "General medical doctor · Uzbekistan",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/javokhir-nazarov.jpg"
+    },
+    {
+      "id": "d43",
+      "name": "Lee Justin Rondina",
+      "role": "Student · Philippines",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/lee-justin-rondina.jpg"
+    },
+    {
+      "id": "d44",
+      "name": "Raquel Tavares",
+      "role": "MA clinical psychologist · Portugal",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/raquel-tavares.jpg"
+    },
+    {
+      "id": "d45",
+      "name": "Andrew Petkin",
+      "role": "Diplom clinical psychologist · Russia",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/andrew-petkin.jpg"
+    },
+    {
+      "id": "d46",
+      "name": "Dr. Augustine Phondo",
+      "role": "MA, PhD Ed · Malawi",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/dr-augustine-phondo.jpg"
+    },
+    {
+      "id": "d47",
+      "name": "Prof. Dr. Shanmukh V. Kamble",
+      "role": "Karnatak University, Dharwad · India",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/prof-dr-shanmukh-v-kamble.jpg"
+    },
+    {
+      "id": "d48",
+      "name": "Klaus Dominik",
+      "role": "Science editor · Germany",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/klaus-dominik.jpg"
+    },
+    {
+      "id": "d-d26fbf99",
+      "name": "HARSH CHAUHAN",
+      "role": "INDIA",
+      "group": "management",
+      "visible": true
+    },
+    {
+      "id": "d-graduated-ps",
+      "name": "Graduated psychologist Ina Wohlgemuth",
+      "role": "Research assistant · Germany",
+      "group": "management",
+      "visible": true,
+      "photo": "assets/photos/members/graduated-psychologist-ina-wohlgemuth.jpg"
+    },
+    {
+      "id": "d-sharid-farse",
+      "name": "Sharid Farseen",
+      "role": "India · Indien",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/sharid-farseen.jpg"
+    },
+    {
+      "id": "d-sameer-kushw",
+      "name": "Sameer Kushwah",
+      "role": "India",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/sameer-kushwah.jpg"
+    },
+    {
+      "id": "d-mahnaz-airem",
+      "name": "Mahnaz Airempoor",
+      "role": "Graduate teacher · Iran - Germany",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/mahnaz-airempoor.jpg"
+    },
+    {
+      "id": "d-computer-ing",
+      "name": "Computer Ingenieur",
+      "role": "Ahmad Jamil · India",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/computer-ingenieur.jpg"
+    },
+    {
+      "id": "d-mohammed-ade",
+      "name": "Mohammed Adel",
+      "role": "Computer Ingenieur · Egypt",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/mohammed-adel.jpg"
+    },
+    {
+      "id": "d-sahal-yawar",
+      "name": "Sahal Yawar",
+      "role": "BS psychologist · India",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/sahal-yawar.jpg"
+    },
+    {
+      "id": "d-fernarose-ge",
+      "name": "Fernarose Gequillo",
+      "role": "Philippines",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/fernarose-gequillo.jpg"
+    },
+    {
+      "id": "d-omar-a-el-ha",
+      "name": "Omar A. El. Hamid",
+      "role": "Pharmacist · Egypt",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/omar-a-el-hamid.jpg"
+    },
+    {
+      "id": "d-islam-ashraf",
+      "name": "Islam Ashraf",
+      "role": "Egypt",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/islam-ashraf.jpg"
+    },
+    {
+      "id": "d-monika-johan",
+      "name": "Monika Johannsen",
+      "role": "System family therapist · Germany",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/monika-johannsen.jpg"
+    },
+    {
+      "id": "d-stefanie-uns",
+      "name": "Stefanie Unsin",
+      "role": "Graduate curative educator · Germany",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/stefanie-unsin.jpg"
+    },
+    {
+      "id": "d-dr-elnay-tam",
+      "name": "Dr. Elnay Tambovskiy",
+      "role": "General doctor · Azerbaidschan",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/dr-elnay-tambovskiy.jpg"
+    },
+    {
+      "id": "d-huimin-li",
+      "name": "Huimin Li",
+      "role": "Graduate psychologist · China",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/huimin-li.jpg"
+    },
+    {
+      "id": "d-dinesh-gajen",
+      "name": "Dinesh Gajendran",
+      "role": "India",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/dinesh-gajendran.jpg"
+    },
+    {
+      "id": "d-dr-aymura-se",
+      "name": "Dr. Aymura Seyidova",
+      "role": "Pediatrician · Azerbaidschan",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/dr-aymura-seyidova.jpg"
+    },
+    {
+      "id": "d-narmin-khana",
+      "name": "Narmin Khanalizada",
+      "role": "BA Psychology BSc Clinical Psychologist · Azerbaidschan",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/narmin-khanalizada.jpg"
+    },
+    {
+      "id": "d-haris-verma",
+      "name": "Haris Verma",
+      "role": "Dipl. Commerce · India",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/haris-verma.jpg"
+    },
+    {
+      "id": "d-maya-aka-bij",
+      "name": "Maya (aka) Biju Raja",
+      "role": "Graduate psychologist · India",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/maya-aka-biju-raja.jpg"
+    },
+    {
+      "id": "d-hridoy-khoun",
+      "name": "Hridoy Khound",
+      "role": "MA Organisational psychologist · India",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/hridoy-khound.jpg"
+    },
+    {
+      "id": "d-seyed-haseeb",
+      "name": "Seyed Haseeb Bani Fatimah",
+      "role": "MA English / literature · India",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/seyed-haseeb-bani-fatimah.jpg"
+    },
+    {
+      "id": "d-m-ravivarman",
+      "name": "M. Ravivarman",
+      "role": "MA Clinical psychologist · India",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/m-ravivarman.jpg"
+    },
+    {
+      "id": "d-riyas-changa",
+      "name": "Riyas Changarath",
+      "role": "MA MSc Clinical psychologist · India",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/riyas-changarath.jpg"
+    },
+    {
+      "id": "d-thenmozhy-pe",
+      "name": "Thenmozhy Perasiriyan",
+      "role": "MSc MPhil BEd psychologist · India",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/thenmozhy-perasiriyan.jpg"
+    },
+    {
+      "id": "d-solomon-razh",
+      "name": "Solomon Razhamah",
+      "role": "MA Career Counseling · India",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/solomon-razhamah.jpg"
+    },
+    {
+      "id": "d-ass-prof-dr-",
+      "name": "Ass. Prof. Dr. Maria Borosivna",
+      "role": "MA Educational Psychologist · Russia",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/ass-prof-dr-maria-borosivna.jpg"
+    },
+    {
+      "id": "d-nalini-ganga",
+      "name": "Nalini Gangadurai",
+      "role": "MA Clinical psychologist · India",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/nalini-gangadurai.jpg"
+    },
+    {
+      "id": "d-haran-parame",
+      "name": "Haran Parameswaran",
+      "role": "BSc psychologist · India",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/haran-parameswaran.jpg"
+    },
+    {
+      "id": "d-sankara-nara",
+      "name": "Sankara Narayanan",
+      "role": "MA Clinical psychologist · India",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/sankara-narayanan.jpg"
+    },
+    {
+      "id": "d-ass-prof-dr-",
+      "name": "Ass. Prof. Dr. Gomathi Sankar Kandappan",
+      "role": "MSc Applied psychologist · India",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/ass-prof-dr-gomathi-sankar-kandappan.jpg"
+    },
+    {
+      "id": "d-mpsych-psych",
+      "name": "MPsych Psychologist",
+      "role": "Sergei Permiakov · Russia",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/mpsych-psychologist.jpg"
+    },
+    {
+      "id": "d-jorge-gomes",
+      "name": "Jorge Gomes",
+      "role": "MA Clinical psychologist · Brazil",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/jorge-gomes.jpg"
+    },
+    {
+      "id": "d-magesh-keert",
+      "name": "Magesh Keerthi",
+      "role": "MA Clinical psychologist · India",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/magesh-keerthi.jpg"
+    },
+    {
+      "id": "d-mamed-zade-s",
+      "name": "Mamed-zade Suleyman",
+      "role": "MA Social psychologist - EMDR · India",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/mamed-zade-suleyman.jpg"
+    },
+    {
+      "id": "d-muhammad-fah",
+      "name": "Muhammad Fahad Jamil",
+      "role": "MA Clinical psychologist · India",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/muhammad-fahad-jamil.jpg"
+    },
+    {
+      "id": "d-nasir-hussyn",
+      "name": "Nasir Hussyn",
+      "role": "BSc psychologist · India",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/nasir-hussyn.jpg"
+    },
+    {
+      "id": "d-manu-dabas",
+      "name": "Manu Dabas",
+      "role": "BA Clinical psychologist · India",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/manu-dabas.jpg"
+    },
+    {
+      "id": "d-nikolia-kutc",
+      "name": "Nikolia Kutcherenko",
+      "role": "Translator · Greece - Germany",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/nikolia-kutcherenko.jpg"
+    },
+    {
+      "id": "d-anna-thoma",
+      "name": "Anna Thoma",
+      "role": "Graduated psychologist · Poland - Germany",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/anna-thoma.jpg"
+    },
+    {
+      "id": "d-joji-varghee",
+      "name": "Joji Varghees",
+      "role": "BA Psychologist/DEd Special Education · India",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/joji-varghees.jpg"
+    },
+    {
+      "id": "d-lena-loginov",
+      "name": "Lena Loginova",
+      "role": "Graduated psychologist · Russia",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/lena-loginova.jpg"
+    },
+    {
+      "id": "d-humin-li",
+      "name": "Humin Li",
+      "role": "Graduated psychologist · China",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/humin-li.jpg"
+    },
+    {
+      "id": "d-ass-prof-dr-",
+      "name": "Ass. Prof. Dr. Abdul Rasack",
+      "role": "BA MA PhD · India",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/ass-prof-dr-abdul-rasack.jpg"
+    },
+    {
+      "id": "d-dr-mohamad-e",
+      "name": "Dr. Mohamad Elwishy",
+      "role": "BA Graduated Clinical Psychologist · Egypt",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/dr-mohamad-elwishy.jpg"
+    },
+    {
+      "id": "d-dr-dominic-x",
+      "name": "Dr. Dominic Xaviar",
+      "role": "BSc MSc MPhil PGDHRM PhD (hc) PhD · India",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/dr-dominic-xaviar.png"
+    },
+    {
+      "id": "d-rishi-bora",
+      "name": "Rishi Bora",
+      "role": "MSc Clinical psychology · India",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/rishi-bora.png"
+    },
+    {
+      "id": "d-chintapete-s",
+      "name": "Chintapete Sunanda",
+      "role": "MSc MA psychologist · India",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/chintapete-sunanda.jpg"
+    },
+    {
+      "id": "d-akash-mohan",
+      "name": "Akash Mohan",
+      "role": "BA MSc MPhil Clinical psychologist · India",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/akash-mohan.jpg"
+    },
+    {
+      "id": "d-gifty-k-vino",
+      "name": "Gifty K Vinod",
+      "role": "BSc MSc psychologist · India",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/gifty-k-vinod.jpg"
+    },
+    {
+      "id": "d-nitin-nishad",
+      "name": "Nitin Nishad",
+      "role": "BSc psychologist, MSc Forensic Psychologist · India",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/nitin-nishad.jpg"
+    },
+    {
+      "id": "d-nikhil-zebuk",
+      "name": "Nikhil Zebukumar",
+      "role": "BSc Psychologist · India",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/nikhil-zebukumar.jpg"
+    },
+    {
+      "id": "d-alwin-paul",
+      "name": "Alwin Paul",
+      "role": "BSc Psychologist · India",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/alwin-paul.jpg"
+    },
+    {
+      "id": "d-mohammed-ajm",
+      "name": "Mohammed Ajmal",
+      "role": "BSc Psychologist · India",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/mohammed-ajmal.jpg"
+    },
+    {
+      "id": "d-dr-s-arputha",
+      "name": "Dr. S. Arputhanesan",
+      "role": "MSc MPhil PGDGC PGDNYD PhD (hc) · India",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/dr-s-arputhanesan.jpg"
+    },
+    {
+      "id": "d-ass-prof-nis",
+      "name": "Ass. Prof. Nisar VP Valparambil",
+      "role": "BSc MSc Psychologist · India",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/ass-prof-nisar-vp-valparambil.jpg"
+    },
+    {
+      "id": "d-ravi-kiran-s",
+      "name": "Ravi Kiran Sajikumar",
+      "role": "BA MSc Psychologist · India",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/ravi-kiran-sajikumar.jpg"
+    },
+    {
+      "id": "d-dipin-joseph",
+      "name": "Dipin Joseph",
+      "role": "BSc Psychologist · India",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/dipin-joseph.jpg"
+    },
+    {
+      "id": "d-muhammed-adi",
+      "name": "Muhammed Adil",
+      "role": "MSc Clinical psychologist · India",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/muhammed-adil.jpg"
+    },
+    {
+      "id": "d-balram-kumar",
+      "name": "Balram Kumar Yadav",
+      "role": "Student · Nepal",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/balram-kumar-yadav.jpg"
+    },
+    {
+      "id": "d-bsc-msc-cons",
+      "name": "BSc MSc Consulting Psychology",
+      "role": "India · Ass. Prof. Sannet Thomas",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/bsc-msc-consulting-psychology.jpg"
+    },
+    {
+      "id": "d-sreesudharsh",
+      "name": "Sreesudharshan Sudhar",
+      "role": "India · MSc Counseling Psychologist",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/sreesudharshan-sudhar-2.jpg"
+    },
+    {
+      "id": "d-divya-p-vija",
+      "name": "Divya P Vijayan",
+      "role": "BSc Clinical Psychologist · India",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/divya-p-vijayan.jpg"
+    },
+    {
+      "id": "d-gopika-rames",
+      "name": "Gopika Ramesh",
+      "role": "BSc psychologist · India",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/gopika-ramesh.jpg"
+    },
+    {
+      "id": "d-msc-c-pt-dph",
+      "name": "MSc(C&PT) Dpharm",
+      "role": "India · M. Ravi",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/msc-c-pt-dpharm.jpg"
+    },
+    {
+      "id": "d-bsc-biochemi",
+      "name": "BSc Biochemistry / MSc Forensic Science student",
+      "role": "India · Abhiram A K",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/bsc-biochemistry-msc-forensic-science-student.jpg"
+    },
+    {
+      "id": "d-bsc-psycholo",
+      "name": "BSc Psychologist, MSc Counceling Dr. Humanity/Jerusalem",
+      "role": "S. Sathiya priya · India",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/bsc-psychologist-msc-counceling-dr-humanity-jerusalem.jpg"
+    },
+    {
+      "id": "d-msc-applied-",
+      "name": "MSc Applied Psychology",
+      "role": "Pooja Sri. S · India",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/msc-applied-psychology-2.jpg"
+    },
+    {
+      "id": "d-haripriya-b-",
+      "name": "Haripriya B Jayan",
+      "role": "India · BSc MSc psychologist",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/haripriya-b-jayan.jpg"
+    },
+    {
+      "id": "d-ass-prof-dr-",
+      "name": "Ass. Prof. Dr. Johnson Joseph",
+      "role": "MPhil Counseling, MSc Clinical Psychology · India",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/ass-prof-dr-johnson-joseph.jpg"
+    },
+    {
+      "id": "d-devika-vijay",
+      "name": "Devika Vijayan",
+      "role": "BSc psychologist · India",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/devika-vijayan.jpg"
+    },
+    {
+      "id": "d-anjana-k-b",
+      "name": "Anjana K B",
+      "role": "BSc psychologist · India",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/anjana-k-b.jpg"
+    },
+    {
+      "id": "d-silpa-v-t",
+      "name": "Silpa V T",
+      "role": "India · BSc MSc psychologist",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/silpa-k.jpg"
+    },
+    {
+      "id": "d-helen-mariar",
+      "name": "Helen Mariaruth Christina",
+      "role": "BSc psychologist · India",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/helen-mariaruth-christina.jpg"
+    },
+    {
+      "id": "d-vayunandana-",
+      "name": "Vayunandana Rao",
+      "role": "MSc Counseling / psychotherapy / psychologist · India",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/vayunandana-rao.jpg"
+    },
+    {
+      "id": "d-subithira-el",
+      "name": "Subithira Elumalai",
+      "role": "MSc Applied Psychology · India",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/subithira-elumalai.jpg"
+    },
+    {
+      "id": "d-munavar-ali",
+      "name": "Munavar Ali",
+      "role": "BSc MSc Applied Psychology · India",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/munavar-ali.jpg"
+    },
+    {
+      "id": "d-abdul-raoof-",
+      "name": "Abdul Raoof KK",
+      "role": "BSc, MSc Psychologist · India",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/abdul-raoof-kk.jpg"
+    },
+    {
+      "id": "d-anjana-joshi",
+      "name": "Anjana Joshi P",
+      "role": "BSc MSc psychologist · India",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/anjana-joshi-p.jpg"
+    },
+    {
+      "id": "d-nikhil-sharm",
+      "name": "Nikhil Sharma",
+      "role": "MA Clinical psychologist BEd Special Educator · India",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/nikhil-sharma.jpg"
+    },
+    {
+      "id": "d-abilash-kasi",
+      "name": "Abilash Kasi",
+      "role": "BSc MSc Psychologist · India",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/abilash-kasi.jpg"
+    },
+    {
+      "id": "d-karanjot-sin",
+      "name": "Karanjot Singh",
+      "role": "MSc Psychologist · India",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/karanjot-singh.jpg"
+    },
+    {
+      "id": "d-depan-meshac",
+      "name": "Depan Meshack",
+      "role": "BSc MSc Applied Psychology · India",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/depan-meshack.jpg"
+    },
+    {
+      "id": "d-abhishek-pra",
+      "name": "Abhishek Prasad",
+      "role": "MSc Applied Psychology · India",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/abhishek-prasad.jpg"
+    },
+    {
+      "id": "d-anoop-peter",
+      "name": "Anoop Peter",
+      "role": "BEd MSc MPhil Clinical psychologist · India",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/anoop-peter.jpg"
+    },
+    {
+      "id": "d-shonima-pete",
+      "name": "Shonima Peter",
+      "role": "BSc MSc Applied psychology · India",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/shonima-peter.jpg"
+    },
+    {
+      "id": "d-arun-pattama",
+      "name": "Arun Pattamathu",
+      "role": "BSc Psychologist · India",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/arun-pattamathu.jpg"
+    },
+    {
+      "id": "d-ass-prof-saf",
+      "name": "Ass. Prof. Safna Sajid",
+      "role": "BSc MA psychologist · India",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/ass-prof-safna-sajid.jpg"
+    },
+    {
+      "id": "d-karthi-keyan",
+      "name": "Karthi Keyan",
+      "role": "MSc Psychologist · India",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/karthi-keyan.jpg"
+    },
+    {
+      "id": "d-abdul-jaleel",
+      "name": "Abdul Jaleel C",
+      "role": "BSc MA Psychologe · India",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/abdul-jaleel-c.jpg"
+    },
+    {
+      "id": "d-elnara-mahar",
+      "name": "Elnara Maharramova",
+      "role": "BSc MSc Psychologist · Azerbaidschan",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/elnara-maharramova.jpg"
+    },
+    {
+      "id": "d-dr-roshan-an",
+      "name": "Dr. Roshan Anie Alex",
+      "role": "PhD psychologist · India",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/dr-roshan-anie-alex.jpg"
+    },
+    {
+      "id": "d-gowtham-s",
+      "name": "Gowtham S",
+      "role": "MSc Applied Psychology · India",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/gowtham-s.jpg"
+    },
+    {
+      "id": "d-deva-pramod-",
+      "name": "Deva Pramod VB",
+      "role": "MSc Consultant Psychologe MBA Human Resource · India",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/deva-pramod-vb.jpg"
+    },
+    {
+      "id": "d-arzu-mammado",
+      "name": "Arzu Mammadova",
+      "role": "BSc MSc psychologist · Azerbaidschan",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/arzu-mammadova.jpg"
+    },
+    {
+      "id": "d-ass-prof-kar",
+      "name": "Ass. Prof. Karishma K Valsan",
+      "role": "BSc MSc psychologist · India",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/ass-prof-karishma-k-valsan.jpg"
+    },
+    {
+      "id": "d-syed-ahmed-a",
+      "name": "Syed Ahmed Arabjan",
+      "role": "BE MSc Psychologist · India",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/syed-ahmed-arabjan.png"
+    },
+    {
+      "id": "d-prof-dr-suba",
+      "name": "Prof. Dr. Subasree Vanamali",
+      "role": "MA PhD Psychologin · India",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/prof-dr-subasree-vanamali.jpg"
+    },
+    {
+      "id": "d-ass-prof-dr-",
+      "name": "Ass. Prof. Dr. Mirjana Jovanovska Stojanovska",
+      "role": "MA Clinical and Counseling psychologist · Mazedonien",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/ass-prof-dr-mirjana-jovanovska-stojanovska.jpg"
+    },
+    {
+      "id": "d-aparna-t",
+      "name": "Aparna T",
+      "role": "MSc Applied psychologist · India",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/aparna-t.jpg"
+    },
+    {
+      "id": "d-abdul-bari-k",
+      "name": "Abdul Bari K A",
+      "role": "BSc Psychologist · India",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/abdul-bari-k-a.jpg"
+    },
+    {
+      "id": "d-s-jerin",
+      "name": "S. Jerin",
+      "role": "DTEd MSc (Maths) BEd MSc (Applied psychologist) · India",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/s-jerin.jpg"
+    },
+    {
+      "id": "d-zeynab-babas",
+      "name": "Zeynab Babashova",
+      "role": "BA (Psych) MA (Social Psych) · Lettland",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/zeynab-babashova.jpg"
+    },
+    {
+      "id": "d-anoop-c-d",
+      "name": "Anoop C D",
+      "role": "MSW MA (Psych) Mphil Consultant Psychologe · India",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/anoop-c-d.jpg"
+    },
+    {
+      "id": "d-dip-cmh-ba-p",
+      "name": "Dip CMH, BA(Psy), MA( App-Psy), MPhil(Psy), PhD(Psy), BEd (Spl Ed)",
+      "role": "Dr. V. Sukumar · India",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/dip-cmh-ba-psy-ma-app-psy-mphil-psy-phd-psy-bed-spl-ed.jpg"
+    },
+    {
+      "id": "d-sharif-shako",
+      "name": "Sharif Shakowath",
+      "role": "BSc(Hons), MSc(Psych) · Bangladesch",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/sharif-shakowath.jpg"
+    },
+    {
+      "id": "d-athira-das",
+      "name": "Athira Das",
+      "role": "BSc (Psych) MSc Applied psychologist · India",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/athira-das.jpg"
+    },
+    {
+      "id": "d-special-educ",
+      "name": "Special education teacher, speech therapist",
+      "role": "Tatiana Yaroshchuk · Russia",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/special-education-teacher-speech-therapist.jpg"
+    },
+    {
+      "id": "d-gayathri-sas",
+      "name": "Gayathri Saseendran",
+      "role": "BSc Psychologist · India",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/gayathri-saseendran.jpg"
+    },
+    {
+      "id": "d-irene-maria-",
+      "name": "Irene Maria Jose",
+      "role": "BEd, BSc, MSc Psychologist · India",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/irene-maria-jose.jpg"
+    },
+    {
+      "id": "d-dr-karthiban",
+      "name": "Dr. Karthiban Harikrishnan",
+      "role": "BCA, LLB, MSc Counseling, MPhil, PhD · India",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/dr-karthiban-harikrishnan.jpg"
+    },
+    {
+      "id": "d-shruti-gupta",
+      "name": "Shruti Gupta",
+      "role": "BA(H), MSc Enviromental Economics · India",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/shruti-gupta.jpg"
+    },
+    {
+      "id": "d-ms-msc-mphil",
+      "name": "MS, MSc, MPhil",
+      "role": "Latha Janaki Ramanujam · India",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/ms-msc-mphil.jpg"
+    },
+    {
+      "id": "d-favas-m",
+      "name": "Favas M",
+      "role": "MSc Psychologist · India",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/favas-m.jpg"
+    },
+    {
+      "id": "d-akhil-chandr",
+      "name": "Akhil Chandran",
+      "role": "BSc Psychologist · India",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/akhil-chandran.jpg"
+    },
+    {
+      "id": "d-sridhar-raja",
+      "name": "Sridhar Rajavel",
+      "role": "Student Psychology · India",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/sridhar-rajavel.jpg"
+    },
+    {
+      "id": "d-barnabas-reu",
+      "name": "Barnabas Reuben G",
+      "role": "BSc Psychologist · India",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/barnabas-reuben-g.jpg"
+    },
+    {
+      "id": "d-lalitha-priy",
+      "name": "Lalitha Priya Venkatraman",
+      "role": "BSc Psychologist · India / Germany",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/lalitha-priya-venkatraman.jpg"
+    },
+    {
+      "id": "d-anusree-sure",
+      "name": "Anusree Suresh",
+      "role": "HSc Bio-Psycholoy, BSc Psychologie, MSc Applied Psychology · India",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/anusree-suresh.jpg"
+    },
+    {
+      "id": "d-hanna-mary-h",
+      "name": "Hanna Mary Hyjan",
+      "role": "BSc Psychologist · India",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/hanna-mary-hyjan.jpg"
+    },
+    {
+      "id": "d-riyaz-sha",
+      "name": "Riyaz Sha",
+      "role": "MBA, MSc Psychologist · India",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/riyaz-sha.jpg"
+    },
+    {
+      "id": "d-dr-natalia-s",
+      "name": "Dr. Natalia Schibaewa",
+      "role": "Dr. paed. · Russia",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/dr-natalia-schibaewa.jpg"
+    },
+    {
+      "id": "d-senthil-kuma",
+      "name": "Senthil Kumar",
+      "role": "BA MSc MPhil Psychologe · India",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/senthil-kumar.jpg"
+    },
+    {
+      "id": "d-ba-social-wo",
+      "name": "BA Social work, Grad. Counseling MA Clinical psychologist",
+      "role": "Ashish Shrestha · Nepal",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/ba-social-work-grad-counseling-ma-clinical-psychologist.jpg"
+    },
+    {
+      "id": "d-muhammad-abi",
+      "name": "Muhammad Abid Aslam",
+      "role": "BS Clinical Psychology · India",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/muhammad-abid-aslam.jpg"
+    },
+    {
+      "id": "d-ass-prof-kav",
+      "name": "Ass. Prof. Kavitha Dhanaraj",
+      "role": "BA Psych, MA Applied Psych, Mphil. Clinical Psychologist · India",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/ass-prof-kavitha-dhanaraj.jpg"
+    },
+    {
+      "id": "d-ass-prof-dr-",
+      "name": "Ass. Prof. Dr. Bulomine Regi",
+      "role": "Business Administration · India",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/ass-prof-dr-bulomine-regi.jpg"
+    },
+    {
+      "id": "d-ma-career-co",
+      "name": "MA Career Counseling",
+      "role": "Ranjeet Kumar · India",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/ma-career-counseling.jpg"
+    },
+    {
+      "id": "d-hashir-ahamm",
+      "name": "Hashir Ahammed A V",
+      "role": "Grad CMH, BA Psych, MA Clinical Psychology · India",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/hashir-ahammed-a-v.jpg"
+    },
+    {
+      "id": "d-s-srikumaran",
+      "name": "S. Srikumaran",
+      "role": "MSc Clinical psychologist · India",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/s-srikumaran.jpg"
+    },
+    {
+      "id": "d-dr-r-shuba",
+      "name": "Dr. R. Shuba",
+      "role": "MA, MPhil, PhD · India",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/dr-r-shuba.jpg"
+    },
+    {
+      "id": "d-mba-in-hr-an",
+      "name": "MBA in HR and Logistk, BA Hindi",
+      "role": "SB Sreethu · India",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/mba-in-hr-and-logistk-ba-hindi.jpg"
+    },
+    {
+      "id": "d-shovkat-mamm",
+      "name": "Shovkat Mammadaliyeva",
+      "role": "BA psychologist · Azerbaidschan",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/shovkat-mammadaliyeva.jpg"
+    },
+    {
+      "id": "d-yousaf-chagu",
+      "name": "Yousaf Chaguvara",
+      "role": "Student · India",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/yousaf-chaguvara.jpg"
+    },
+    {
+      "id": "d-anandu-s",
+      "name": "Anandu S",
+      "role": "BSc Psychologist · India",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/anandu-s.jpg"
+    },
+    {
+      "id": "d-ba-ed-ba-ma-",
+      "name": "BA Ed, BA, MA Englisch/Literature",
+      "role": "M Rajapandi · India / Africa",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/ba-ed-ba-ma-englisch-literature.jpg"
+    },
+    {
+      "id": "d-anil-kumar-p",
+      "name": "Anil Kumar P",
+      "role": "BSc Botany, BEd Natural Science, MSc Psychology · India",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/anil-kumar-p.jpg"
+    },
+    {
+      "id": "d-rasmita-behe",
+      "name": "Rasmita Behera",
+      "role": "MA Applied psychology · India",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/rasmita-behera.jpg"
+    },
+    {
+      "id": "d-aytac-abbasb",
+      "name": "Aytac Abbasbeyli",
+      "role": "BSc Psychologist · Germany/Azerbaidschan",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/aytac-abbasbeyli.jpg"
+    },
+    {
+      "id": "d-saida-huseyn",
+      "name": "Saida Huseynova",
+      "role": "BA Psych, MA Clinical psychologist · Azerbaidschan",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/saida-huseynova.jpg"
+    },
+    {
+      "id": "d-aynur-rahimo",
+      "name": "Aynur Rahimova",
+      "role": "MA Developmental psychology · Azerbaidschan",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/aynur-rahimova.jpg"
+    },
+    {
+      "id": "d-elshan-baira",
+      "name": "Elshan Bairamov",
+      "role": "BA Social psychologist · Georgien",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/elshan-bairamov.jpg"
+    },
+    {
+      "id": "d-daniela-domi",
+      "name": "Daniela Dominguez Acosta",
+      "role": "Lawyer, qualified pedagogue, criminologist · Mexico",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/daniela-dominguez-acosta.jpg"
+    },
+    {
+      "id": "d-msc-ma-phd-i",
+      "name": "MSc, MA, PhD Integrative Medicine",
+      "role": "Dr. Akshun Kaji Ghotane Gurung · Australia",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/msc-ma-phd-integrative-medicine.jpg"
+    },
+    {
+      "id": "d-dr-mult-eliz",
+      "name": "Dr. mult. Elizabeth Garcia Rubio",
+      "role": "MA criminology, Dr. pol., Dr. hist. · Mexico",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/dr-mult-elizabeth-garcia-rubio.jpg"
+    },
+    {
+      "id": "d-rubab-m-rdan",
+      "name": "Rübabə Mərdanova",
+      "role": "BA Psychology, MA NLP · Azerbaidschan",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/rubab-m-rdanova.jpg"
+    },
+    {
+      "id": "d-harshit-kala",
+      "name": "Harshit Kalal",
+      "role": "Student BHMS · India",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/harshit-kalal.jpg"
+    },
+    {
+      "id": "d-aysel-bag-rl",
+      "name": "Aysel Bağırlı",
+      "role": "psychologist · Azerbaidschan",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/aysel-bag-rl.jpg"
+    },
+    {
+      "id": "d-fuad-s-dov",
+      "name": "Fuad Əsədov",
+      "role": "MSc Clinical psychologist · Azerbaidschan",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/fuad-s-dov.jpg"
+    },
+    {
+      "id": "d-dr-m-maria-a",
+      "name": "Dr. M. Maria Antony Raj",
+      "role": "BSc Maths, MSc Psych, PhD Social work · India",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/dr-m-maria-antony-raj.jpg"
+    },
+    {
+      "id": "d-nikita-sharm",
+      "name": "Nikita Sharma",
+      "role": "MSc Psychology · India",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/nikita-sharma.jpg"
+    },
+    {
+      "id": "d-shiv-kumar-t",
+      "name": "Shiv Kumar Tripath",
+      "role": "BA MA Clinical Psychology · India",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/shiv-kumar-tripath.jpg"
+    },
+    {
+      "id": "d-bsc-msc-coun",
+      "name": "BSc MSc Counseling Psychology",
+      "role": "Ass. Prof. Ananyalakshmi V R · India",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/bsc-msc-counseling-psychology.jpg"
+    },
+    {
+      "id": "d-ksenia-trefi",
+      "name": "Ksenia Trefilova",
+      "role": "Graduated Educator · Spain",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/ksenia-trefilova.jpg"
+    },
+    {
+      "id": "d-prashant-man",
+      "name": "Prashant Mani Tiwari",
+      "role": "MA MSc Counseling Psychology · India",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/prashant-mani-tiwari.jpg"
+    },
+    {
+      "id": "d-dr-fargan-as",
+      "name": "Dr. Fargan Asghar",
+      "role": "BSc DHMS Clinical Psychologist · Pakistan",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/dr-fargan-asghar.jpg"
+    },
+    {
+      "id": "d-dr-med-dent-",
+      "name": "Dr. med. dent. Anil Puri",
+      "role": "Dentist · India",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/dr-med-dent-anil-puri.jpg"
+    },
+    {
+      "id": "d-digvijay-yad",
+      "name": "Digvijay Yadav",
+      "role": "Student · Nepal",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/digvijay-yadav.jpg"
+    },
+    {
+      "id": "d-dr-suresh-ku",
+      "name": "Dr. Suresh Kumar Agarwal",
+      "role": "MSc.(Triple),MD.(Hom),MP.H.,PhD., DLitt(Hon) · India",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/dr-suresh-kumar-agarwal.jpg"
+    },
+    {
+      "id": "d-bed-ba-econ-",
+      "name": "BEd, BA(Econ) BEd. Honours (ED Psych, MEd (ED Psych), PhD (Ed.)",
+      "role": "Dr. Fumane Khanare · South-Africa",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/bed-ba-econ-bed-honours-ed-psych-med-ed-psych-phd-ed.jpg"
+    },
+    {
+      "id": "d-rehna-k",
+      "name": "Rehna K",
+      "role": "MSc Applied Psychology · India",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/rehna-k.jpg"
+    },
+    {
+      "id": "d-dr-jovita-sh",
+      "name": "Dr. Jovita Sherin George",
+      "role": "MSc Applied Psychology, PhD. · India",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/dr-jovita-sherin-george.jpg"
+    },
+    {
+      "id": "d-dr-amal-tom-",
+      "name": "Dr. Amal Tom Jose Kolothu",
+      "role": "MSc Applied Psychology PhD. · India",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/dr-amal-tom-jose-kolothu.jpg"
+    },
+    {
+      "id": "d-facharztin-f",
+      "name": "Fachärztin für Allgemeinmedizin",
+      "role": "Mitra Airompur · Iran - Germany",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/facharztin-fur-allgemeinmedizin.jpg"
+    },
+    {
+      "id": "d-ashok-kumar",
+      "name": "Ashok kumar",
+      "role": "BAEco, Mphil. · India",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/ashok-kumar.jpg"
+    },
+    {
+      "id": "d-dr-harguneet",
+      "name": "Dr. Harguneet Kaur",
+      "role": "BA MA PhD. Psychology · India",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/dr-harguneet-kaur.jpg"
+    },
+    {
+      "id": "d-purushotham-",
+      "name": "Purushotham Balipongu",
+      "role": "BA MSc PG Diploma Counseling · India",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/purushotham-balipongu.jpg"
+    },
+    {
+      "id": "d-ba-ma-mphil-",
+      "name": "BA., MA., MPhil. Clinical Psychology",
+      "role": "Jyosil Kumar Bhol · India",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/ba-ma-mphil-clinical-psychology.jpg"
+    },
+    {
+      "id": "d-dr-saleem-ak",
+      "name": "Dr. Saleem Akbar",
+      "role": "BSc, MSc, MBA, PhD · India",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/dr-saleem-akbar.jpg"
+    },
+    {
+      "id": "d-singh-manjee",
+      "name": "Singh Manjeet",
+      "role": "BA, BEd, MA (Psych), PhD (Psych) · India",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/singh-manjeet.jpg"
+    },
+    {
+      "id": "d-ba-psych-msc",
+      "name": "BA Psych, MSc Klinische Psychologie",
+      "role": "Benny Chinna Rao · India",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/ba-psych-msc-klinische-psychologie.png"
+    },
+    {
+      "id": "d-sadaf-afrin",
+      "name": "Sadaf Afrin",
+      "role": "BA Hons, MSc Klinische Psychologie · India",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/sadaf-afrin.jpg"
+    },
+    {
+      "id": "d-seerat-goyal",
+      "name": "Seerat Goyal",
+      "role": "BA Psych, MSc Klinische Psychologie · India",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/seerat-goyal.jpg"
+    },
+    {
+      "id": "d-hari-babu",
+      "name": "Hari Babu",
+      "role": "BSc., MSc., PhD (Klinische Psychologie) · India",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/hari-babu.jpg"
+    },
+    {
+      "id": "d-bsc-psych-b-",
+      "name": "BSc Psych, B.E.M.S, Electropathy Medicine, MSc. Psychol, MBA Hospital and Health Care Management",
+      "role": "Dr. Dhaya Nidhi · India",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/bsc-psych-b-e-m-s-electropathy-medicine-msc-psychol-mba-hospital-and-health-care.jpg"
+    },
+    {
+      "id": "d-hanna-vl",
+      "name": "Hanna VL",
+      "role": "MSc Klinische Psychologie · India",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/hanna-vl.jpg"
+    },
+    {
+      "id": "d-fahiza-majee",
+      "name": "Fahiza Majeed",
+      "role": "BSc. Psych., M.A. Angewandte Psych., Klin. Psychologie, MSc. Entwicklungspsychologie · India",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/fahiza-majeed.jpg"
+    },
+    {
+      "id": "d-ali-hassan",
+      "name": "Ali Hassan",
+      "role": "Student Psychologie · Pakistan",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/ali-hassan.jpg"
+    },
+    {
+      "id": "d-shabnam-aliz",
+      "name": "Shabnam Alizade",
+      "role": "BA sozialpsychologische Education · Azerbaidschan",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/shabnam-alizade.jpg"
+    },
+    {
+      "id": "d-varsha-a-mal",
+      "name": "Varsha A Malagi",
+      "role": "BSc (Psychology, Botany, Zoology), MSc Psychology · India",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/varsha-a-malagi.jpg"
+    },
+    {
+      "id": "d-bsc-psycholo",
+      "name": "BSc Psychologie, MSc. Counseling Psychotherapy",
+      "role": "Divya Sadhana · India",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/bsc-psychologie-msc-counseling-psychotherapy.jpg"
+    },
+    {
+      "id": "d-sathya-priya",
+      "name": "Sathya priya Moorthy",
+      "role": "Klin. Psychologin/Dr Rahul's Elder Care Geriatrische Psychologin/Grand World Elder Care · India",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/sathya-priya-moorthy.jpg"
+    },
+    {
+      "id": "d-famitha-banu",
+      "name": "Famitha Banu",
+      "role": "BSc Psych., MSc Clinical Psychologist · India",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/famitha-banu.jpg"
+    },
+    {
+      "id": "d-dr-syed-faha",
+      "name": "Dr. Syed Fahad Hussain, Ph.D",
+      "role": "Graduate in economy Postgraduate in Socialwork · Dr. Syed Fahad Hussain, Ph.D. · India",
+      "group": "lecturers",
+      "visible": true
+    },
+    {
+      "id": "d-niraj-kumar",
+      "name": "Ñíräj Kúmär",
+      "role": "BSc Psychology · India",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/niraj-kumar.jpg"
+    },
+    {
+      "id": "d-dr-pravin-ba",
+      "name": "Dr. Pravin Baviskar, Soz. Psych",
+      "role": "BSc, MSc Päd. Psychology · Dr. Pravin Baviskar, Soz. Psych. · India",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/dr-pravin-baviskar-soz-psych.jpg"
+    },
+    {
+      "id": "d-melek-kerimo",
+      "name": "Melek Kerimova",
+      "role": "MSc Psychology · Azerbaijan",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/melek-kerimova.jpg"
+    },
+    {
+      "id": "d-dr-sagayaraj",
+      "name": "Dr. Sagayaraj Kanagaraj",
+      "role": "BSc. Psych., MSc Counseling Psychology · India",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/dr-sagayaraj-kanagaraj.jpg"
+    },
+    {
+      "id": "d-ba-msc-psych",
+      "name": "BA, MSc Psych., MPhil. Rehabil. Psychology",
+      "role": "Dr. C. K. Dhanapandian · India",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/ba-msc-psych-mphil-rehabil-psychology.jpg"
+    },
+    {
+      "id": "d-subash",
+      "name": "Subash",
+      "role": "MSc Clinical psychologist · India",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/subash.jpg"
+    },
+    {
+      "id": "d-linette-shoj",
+      "name": "Linette Shoji",
+      "role": "BA Psychology honours · India",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/linette-shoji.jpg"
+    },
+    {
+      "id": "d-krishnan-siv",
+      "name": "Krishnan Sivaraman",
+      "role": "MA Soziologie, PG Dip Parent Counseling, Diploma in Counseling and Psychotherapy · India",
+      "group": "lecturers",
+      "visible": true,
+      "photo": "assets/photos/members/krishnan-sivaraman.jpg"
+    },
+    {
+      "id": "d-msc-counsell",
+      "name": "MSc Counselling and Psychotherapy",
+      "role": "Vikash TS · India",
+      "group": "lecturers",
+      "visible": true
+    }
+  ],
+  "reviewers": [
+    {
+      "id": "r1",
+      "name": "Evgeny Shvedovskiy",
+      "bio": "Graduate specialist in clinical psychology, Moscow State University of Psychology of Special Education. Clinical psychologist, lecturer, member of INS, ICCPP, and APA.",
+      "visible": true
+    },
+    {
+      "id": "r2",
+      "name": "Ass. Prof. Dr. Maharishi Ranganathan",
+      "bio": "Assistant Professor at Christ University, Bangalore. PhD in neuropsychology, Vellore Institute of Technology. Researcher with ICSSR.",
+      "visible": true
+    },
+    {
+      "id": "r3",
+      "name": "Dr. Javokhir Nazarov, M.D.",
+      "bio": "Medical education at Tashkent Medical Academy, Uzbekistan (2014–2020).",
+      "visible": true
+    },
+    {
+      "id": "r4",
+      "name": "Andrew Petkin",
+      "bio": "Clinical psychology diploma with distinction, Moscow State University of Psychology & Pedagogy. Specialisation in pathopsychological diagnostics and psychotherapy.",
+      "visible": true
+    },
+    {
+      "id": "r-97b5d8e8",
+      "name": "HARSH CHAUHAN",
+      "bio": "BJSSOIDVNVJDSNVNDSVNSKNVOIRN",
+      "visible": true
+    }
+  ]
+}

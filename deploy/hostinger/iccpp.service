@@ -1,0 +1,15 @@
+[Unit]
+Description=ICCPP Flask (Gunicorn)
+After=network.target
+
+[Service]
+User=www-data
+Group=www-data
+WorkingDirectory=/var/www/iccpp
+Environment=PATH=/var/www/iccpp/.venv/bin
+EnvironmentFile=/var/www/iccpp/.env
+ExecStart=/var/www/iccpp/.venv/bin/gunicorn --workers 3 --bind unix:/var/www/iccpp/iccpp.sock -m 007 wsgi:app
+Restart=always
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,38 @@
+[
+  {
+    "id": "inq-fee03391",
+    "type": "feedback",
+    "status": "new",
+    "created": "2026-09-20T15:20:59Z",
+    "fields": {
+      "first": "Alina",
+      "last": "Tester",
+      "email": "alina.feedback@example.com",
+      "message": "The site looks clearer with the new motion and this Feedback button."
+    }
+  },
+  {
+    "id": "inq-33719a5e",
+    "type": "newsletter",
+    "status": "new",
+    "created": "2026-09-02T07:09:13Z",
+    "fields": {
+      "first": "Nora",
+      "last": "Khan",
+      "email": "nora@example.com",
+      "country": "Germany"
+    }
+  },
+  {
+    "id": "inq-f65f4857",
+    "type": "contact",
+    "status": "new",
+    "created": "2026-09-02T07:07:00Z",
+    "fields": {
+      "first": "Ada",
+      "last": "Lovelace",
+      "email": "ada@example.com",
+      "message": "Hello from the test"
+    }
+  }
+]

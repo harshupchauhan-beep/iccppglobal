@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Admin login — ICCPP</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700&family=Source+Serif+4:opsz,wght@8..60,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/admin/css/admin.css">
+</head>
+<body class="login-body">
+  <form class="login-card" id="login-form">
+    <p class="kicker">Staff only</p>
+    <h1>ICCPP admin</h1>
+    <p>Sign in to read enquiries and edit Centre pages.</p>
+    <label>Username <input name="user" type="text" autocomplete="username" required></label>
+    <label>Password <input name="password" type="password" autocomplete="current-password" required></label>
+    <button class="btn" type="submit">Sign in</button>
+    <p class="status" id="login-status" role="status"></p>
+  </form>
+  <script>
+    fetch("/api/admin/me").then((res) => {
+      if (res.ok) location.replace("/admin/");
+    }).catch(() => {});
+
+    document.getElementById("login-form").addEventListener("submit", async (event) => {
+      event.preventDefault();
+      const status = document.getElementById("login-status");
+      const data = Object.fromEntries(new FormData(event.target));
+      status.textContent = "";
+      status.className = "status";
+      try {
+        const res = await fetch("/api/admin/login", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(data),
+        });
+        const payload = await res.json();
+        if (!res.ok) throw new Error(payload.error || "Could not sign in.");
+        location.replace("/admin/");
+      } catch (err) {
+        status.textContent = err.message;
+        status.className = "status error";
+      }
+    });
+  </script>
+</body>
+</html>
