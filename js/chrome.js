@@ -9,8 +9,8 @@
       <div class="wrap">
         <span class="header-meta">Aichach, Germany</span>
         <div class="header-bar-links">
-          <a href="tel:+491775722600">+49 177 5722600</a>
-          <a href="mailto:info@iccpp.org">info@iccpp.org</a>
+          <a href="tel:+918130673015">+91 81306 73015</a>
+          <a href="mailto:iccppglobal@gmail.com">iccppglobal@gmail.com</a>
           <div class="lang-switch" role="group" aria-label="Language">
             <button type="button" class="lang-btn" data-lang="en" aria-label="Switch to English" title="English">
               <svg viewBox="0 0 60 30" aria-hidden="true" focusable="false">
@@ -146,8 +146,8 @@
       <div>
         <h3>Contact</h3>
         <ul>
-          <li><a href="tel:+491775722600">+49 177 5722600</a></li>
-          <li><a href="mailto:info@iccpp.org">info@iccpp.org</a></li>
+          <li><a href="tel:+918130673015">+91 81306 73015</a></li>
+          <li><a href="mailto:iccppglobal@gmail.com">iccppglobal@gmail.com</a></li>
           <li><a href="${r}contact.html">Contact</a></li>
           <li><a href="${r}privacy.html">Data protection</a></li>
           <li><a href="${r}imprint.html">Imprint</a></li>
@@ -198,7 +198,7 @@
   }
 
   const i18n = document.createElement("script");
-  i18n.src = `${r}js/i18n.js?v=10`;
+  i18n.src = `${r}js/i18n.js?v=11`;
   i18n.async = false;
   document.body.appendChild(i18n);
 })();
