@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Submit a paper — ICCPP</title>
+  <meta name="description" content="Pay the article processing charge and submit a manuscript for review by ICCPP Journal.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700&family=Source+Serif+4:opsz,wght@8..60,500;8..60,600;8..60,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css?v=20">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <main id="main">
+    <section class="page-hero">
+      <div class="wrap">
+        <p class="kicker">Journal</p>
+        <h1>Submit a paper for review.</h1>
+        <p class="lead">Pay the article processing charge with Razorpay, then Centre staff receive your manuscript in the inbox. Publication follows peer review. The paper is not posted automatically.</p>
+      </div>
+    </section>
+
+    <section class="section section-paper">
+      <div class="wrap news-split">
+        <div>
+          <h2>What happens next</h2>
+          <p>After payment your name, title, abstract, and optional PDF are stored for Centre staff. Editors review the work. Accepted papers are added to an issue through the Journals tools.</p>
+          <p>PDFs on this form must be 4 MB or smaller. A larger file can be emailed to <a href="mailto:iccppglobal@gmail.com">iccppglobal@gmail.com</a> with your payment id after checkout.</p>
+          <p class="legal">Editorial questions that do not need payment can still go to <a href="mailto:verlagpib@gmail.com">verlagpib@gmail.com</a>.</p>
+        </div>
+        <aside>
+          <h2>Manuscript and payment</h2>
+          <p id="paper-fee">Loading the fee…</p>
+          <form class="form" id="paper-form">
+            <label>Author name <input name="name" type="text" required></label>
+            <label>Email <input name="email" type="email" required></label>
+            <label>Paper title <input name="title" type="text" required></label>
+            <label>Abstract <textarea name="abstract" rows="6" required></textarea></label>
+            <label>Manuscript PDF (optional, 4 MB max) <input name="file" type="file" accept="application/pdf,.pdf"></label>
+            <button class="btn" type="submit" id="paper-pay">Pay and submit</button>
+            <p class="form-status" id="paper-status" role="status"></p>
+          </form>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+  <script src="js/chrome.js?v=18"></script>
+  <script src="js/main.js?v=12"></script>
+  <script src="js/paper.js?v=1"></script>
+</body>
+</html>

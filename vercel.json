@@ -5,5 +5,19 @@
     "server.py": {
       "maxDuration": 60
     }
-  }
+  },
+  "redirects": [
+    {
+      "source": "/",
+      "has": [{ "type": "host", "value": "www.iccppglobal.com" }],
+      "destination": "https://iccppglobal.com/",
+      "permanent": true
+    },
+    {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "www.iccppglobal.com" }],
+      "destination": "https://iccppglobal.com/:path*",
+      "permanent": true
+    }
+  ]
 }

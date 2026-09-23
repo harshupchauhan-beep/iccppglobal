@@ -1,7 +1,9 @@
 """ICCPP local server: public site + /admin panel."""
 from __future__ import annotations
 
+import base64
 import csv
+import hashlib
 import hmac
 import io
 import json
@@ -9,6 +11,8 @@ import os
 import re
 import secrets
 import threading
+import urllib.error
+import urllib.request
 import uuid
 from datetime import datetime, timezone
 from functools import wraps
@@ -30,7 +34,9 @@ ADMIN = ROOT / "admin"
 BLOCKED_PREFIXES = ("admin", "api", "data")
 
 EMAIL_RE = re.compile(r"^[^\s@]+@[^\s@]+\.[^\s@]+$")
-INQUIRY_TYPES = {"newsletter", "internship", "contact", "feedback"}
+INQUIRY_TYPES = {"newsletter", "internship", "contact", "feedback", "paper"}
+PAPER_FILE_RE = re.compile(r"^assets/papers/[A-Za-z0-9._-]+\.pdf$")
+PAPER_PDF_MAX = 4 * 1024 * 1024
 INQUIRY_STATUSES = {"new", "read", "replied"}
 MEMBER_GROUPS = {"management", "phd", "lecturers"}
 PHOTO_RE = re.compile(r"^assets/photos/members/[A-Za-z0-9._-]+$")
@@ -82,6 +88,7 @@ if os.environ.get("VERCEL") or os.environ.get("PRODUCTION"):
 
 ADMIN_USER = os.environ.get("ADMIN_USER", "admin")
 ADMIN_PASSWORD = os.environ.get("ADMIN_PASSWORD", "iccpp-admin")
+CANONICAL_HOST = os.environ.get("CANONICAL_HOST", "iccppglobal.com")
 
 
 def data_path(name: str) -> Path:
@@ -141,6 +148,50 @@ def clean_http_url(value) -> str:
     return url if url.startswith("https://") else ""
 
 
+def razorpay_keys() -> tuple[str, str]:
+    return str(os.environ.get("RAZORPAY_KEY_ID") or "").strip(), str(os.environ.get("RAZORPAY_KEY_SECRET") or "").strip()
+
+
+def paper_fee() -> tuple[int, str, str]:
+    data = read_json("payments.json", {"paperFeeInr": 5000, "currency": "INR", "label": "Article processing charge"})
+    try:
+        amount = int(data.get("paperFeeInr") or 5000)
+    except (TypeError, ValueError):
+        amount = 5000
+    if amount < 1:
+        amount = 5000
+    currency = str(data.get("currency") or "INR").strip().upper() or "INR"
+    label = str(data.get("label") or "Article processing charge").strip()
+    return amount, currency, label
+
+
+def razorpay_signature_ok(order_id: str, payment_id: str, signature: str, secret: str) -> bool:
+    expected = hmac.new(
+        secret.encode("utf-8"),
+        f"{order_id}|{payment_id}".encode("utf-8"),
+        hashlib.sha256,
+    ).hexdigest()
+    return hmac.compare_digest(expected, signature)
+
+
+def save_paper_pdf(uploaded) -> str:
+    if uploaded is None or not uploaded.filename:
+        return ""
+    ext = Path(uploaded.filename).suffix.lower()
+    if ext not in PDF_TYPE:
+        raise ValueError("Please upload a PDF.")
+    data = uploaded.read(PAPER_PDF_MAX + 1)
+    if not data:
+        return ""
+    if len(data) > PAPER_PDF_MAX:
+        raise ValueError("PDF must be 4 MB or smaller on this form. Email the full file to iccppglobal@gmail.com with your payment id.")
+    filename = f"{new_id('paper')}.pdf"
+    dest_dir = ROOT / "assets" / "papers"
+    dest_dir.mkdir(parents=True, exist_ok=True)
+    (dest_dir / filename).write_bytes(data)
+    return f"assets/papers/{filename}"
+
+
 def now_iso() -> str:
     return datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
 
@@ -155,6 +206,17 @@ def login_required(view):
         return view(*args, **kwargs)
 
     return wrapped
+
+
+@app.before_request
+def force_apex_host():
+    if not (os.environ.get("VERCEL") or os.environ.get("PRODUCTION")):
+        return None
+    host = (request.host or "").split(":")[0].lower()
+    if host != f"www.{CANONICAL_HOST}":
+        return None
+    target = request.url.replace(f"://{host}", f"://{CANONICAL_HOST}", 1)
+    return redirect(target, code=301)
 
 
 @app.before_request
@@ -218,6 +280,101 @@ def public_donate():
     return jsonify({"paypalUrl": url})
 
 
+@app.get("/api/payments/paper")
+def public_paper_payment():
+    amount, currency, label = paper_fee()
+    key_id, secret = razorpay_keys()
+    return jsonify(
+        {
+            "amount": amount,
+            "currency": currency,
+            "label": label,
+            "keyId": key_id,
+            "configured": bool(key_id and secret),
+        }
+    )
+
+
+@app.post("/api/payments/paper/order")
+def create_paper_order():
+    key_id, secret = razorpay_keys()
+    if not key_id or not secret:
+        return jsonify({"error": "Paper payment is not configured yet."}), 503
+    amount, currency, _label = paper_fee()
+    payload = json.dumps(
+        {"amount": amount * 100, "currency": currency, "receipt": new_id("rcpt"), "payment_capture": 1}
+    ).encode("utf-8")
+    auth = base64.b64encode(f"{key_id}:{secret}".encode("utf-8")).decode("ascii")
+    req = urllib.request.Request(
+        "https://api.razorpay.com/v1/orders",
+        data=payload,
+        headers={
+            "Authorization": f"Basic {auth}",
+            "Content-Type": "application/json",
+        },
+        method="POST",
+    )
+    try:
+        with urllib.request.urlopen(req, timeout=20) as response:
+            body = json.loads(response.read().decode("utf-8"))
+    except urllib.error.HTTPError as err:
+        detail = err.read().decode("utf-8", errors="replace")[:240]
+        return jsonify({"error": "Could not start payment.", "detail": detail}), 502
+    except OSError:
+        return jsonify({"error": "Could not reach Razorpay."}), 502
+    order_id = str(body.get("id") or "")
+    if not order_id:
+        return jsonify({"error": "Could not start payment."}), 502
+    return jsonify({"orderId": order_id, "amount": amount, "currency": currency, "keyId": key_id})
+
+
+@app.post("/api/payments/paper/submit")
+def submit_paid_paper():
+    key_id, secret = razorpay_keys()
+    if not key_id or not secret:
+        return jsonify({"error": "Paper payment is not configured yet."}), 503
+    form = request.form
+    name = str(form.get("name") or "").strip()
+    email = str(form.get("email") or "").strip()
+    title = str(form.get("title") or "").strip()
+    abstract = str(form.get("abstract") or "").strip()
+    order_id = str(form.get("razorpay_order_id") or "").strip()
+    payment_id = str(form.get("razorpay_payment_id") or "").strip()
+    signature = str(form.get("razorpay_signature") or "").strip()
+    if not all((name, email, title, abstract, order_id, payment_id, signature)):
+        return jsonify({"error": "Please complete the required fields and finish payment."}), 400
+    if not EMAIL_RE.match(email):
+        return jsonify({"error": "Please enter a valid email address."}), 400
+    if not razorpay_signature_ok(order_id, payment_id, signature, secret):
+        return jsonify({"error": "Payment could not be verified."}), 400
+    try:
+        pdf_path = save_paper_pdf(request.files.get("file"))
+    except ValueError as err:
+        return jsonify({"error": str(err)}), 400
+    fields = {
+        "name": name,
+        "email": email,
+        "title": title,
+        "abstract": abstract,
+        "payment_id": payment_id,
+        "order_id": order_id,
+    }
+    if pdf_path:
+        fields["file"] = pdf_path
+    record = {
+        "id": new_id("inq"),
+        "type": "paper",
+        "status": "new",
+        "created": now_iso(),
+        "fields": fields,
+    }
+    with lock:
+        items = read_json("inquiries.json", [])
+        items.insert(0, record)
+        write_json("inquiries.json", items)
+    return jsonify({"ok": True, "id": record["id"], "file": pdf_path})
+
+
 @app.get("/api/content/journals")
 def public_journals():
     data = read_json("journals.json", {"issues": []})
@@ -254,6 +411,8 @@ def create_inquiry():
     if not EMAIL_RE.match(email):
         return jsonify({"error": "Please enter a valid email address."}), 400
 
+    if kind == "paper":
+        return jsonify({"error": "Please submit the paper through the journal payment form."}), 400
     if kind == "newsletter":
         required = ("first", "last", "email", "country")
     elif kind == "internship":

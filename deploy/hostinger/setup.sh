@@ -53,6 +53,7 @@ fi
 
 echo
 echo "Site service is running."
-echo "Point $DOMAIN and www.$DOMAIN A records to this VPS IP, then run:"
+echo "Point $DOMAIN A record to this VPS IP. Optionally add CNAME www.$DOMAIN → $DOMAIN so www redirects."
+echo "Then run:"
 echo "  sudo certbot --nginx -d $DOMAIN -d www.$DOMAIN"
-echo "Admin: https://www.$DOMAIN/admin"
+echo "Admin: https://$DOMAIN/admin"

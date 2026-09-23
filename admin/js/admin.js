@@ -70,6 +70,7 @@
         <div class="stat"><b>${stats.byType?.internship || 0}</b><span>Internship applications</span></div>
         <div class="stat"><b>${stats.byType?.contact || 0}</b><span>Contact messages</span></div>
         <div class="stat"><b>${stats.byType?.newsletter || 0}</b><span>Newsletter sign-ups</span></div>
+        <div class="stat"><b>${stats.byType?.paper || 0}</b><span>Paid paper submissions</span></div>
       </div>
       <div class="panel">
         <h2>Recent inbox</h2>
@@ -84,7 +85,14 @@
   const inquiryDetail = (item) => {
     const fields = item.fields || {};
     const lines = Object.entries(fields)
-      .map(([key, value]) => `<p><strong>${escapeHtml(key)}:</strong> ${escapeHtml(value)}</p>`)
+      .map(([key, value]) => {
+        const text = String(value || "");
+        const safe = escapeHtml(text);
+        if (key === "file" && /^assets\/papers\/[A-Za-z0-9._-]+\.pdf$/.test(text)) {
+          return `<p><strong>${escapeHtml(key)}:</strong> <a href="/${safe}" target="_blank" rel="noopener noreferrer">${safe}</a></p>`;
+        }
+        return `<p><strong>${escapeHtml(key)}:</strong> ${safe}</p>`;
+      })
       .join("");
     return `
       <div class="panel detail" data-detail="${escapeHtml(item.id)}">
@@ -102,7 +110,7 @@
   const renderInbox = async () => {
     setNav("inbox");
     title.textContent = "Inbox";
-    subtitle.textContent = "Internship applications, contact messages, and newsletter sign-ups.";
+    subtitle.textContent = "Internship applications, contact messages, paper submissions, and newsletter sign-ups.";
     view.innerHTML = `
       <div class="toolbar">
         <select id="filter-type">
@@ -110,6 +118,7 @@
           <option value="internship">Internship</option>
           <option value="contact">Contact</option>
           <option value="feedback">Feedback</option>
+          <option value="paper">Paper</option>
           <option value="newsletter">Newsletter</option>
         </select>
         <select id="filter-status">

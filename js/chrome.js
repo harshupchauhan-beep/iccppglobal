@@ -140,6 +140,7 @@
           <li><a href="${r}mission.html">Mission</a></li>
           <li><a href="${r}documentation.html">Documentation</a></li>
           <li><a href="${r}journal.html">Journal</a></li>
+          <li><a href="${r}donate.html">Donate</a></li>
           <li><a href="${r}archive.html">Archive</a></li>
         </ul>
       </div>
@@ -198,7 +199,7 @@
   }
 
   const i18n = document.createElement("script");
-  i18n.src = `${r}js/i18n.js?v=11`;
+  i18n.src = `${r}js/i18n.js?v=12`;
   i18n.async = false;
   document.body.appendChild(i18n);
 })();
