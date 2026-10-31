@@ -1,0 +1,53 @@
+<footer class="site-footer">
+    <div class="wrap footer-grid">
+      <div>
+        <h2>ICCPP</h2>
+        <p>International Centre for Clinical Psychology and Psychotherapy, in cooperation with Krasnoyarsk State Medical University — Prof. V. F. Voino-Yasenetsky.</p>
+        <p>Franz-Beck-Straße 31<br>86551 Aichach, Germany</p>
+      </div>
+      <div>
+        <h3>Visit</h3>
+        <ul>
+          <li><a href="__ROOT__mission.html">Mission</a></li>
+          <li><a href="__ROOT__documentation.html">Documentation</a></li>
+          <li><a href="__ROOT__journal.html">Journal</a></li>
+          <li><a href="__ROOT__donate.html">Donate</a></li>
+          <li><a href="__ROOT__archive.html">Archive</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Contact</h3>
+        <ul>
+          <li><a href="tel:+918130673015">+91 81306 73015</a></li>
+          <li><a href="mailto:iccppglobal@gmail.com">iccppglobal@gmail.com</a></li>
+          <li><a href="__ROOT__contact.html">Contact</a></li>
+          <li><a href="__ROOT__privacy.html">Data protection</a></li>
+          <li><a href="__ROOT__imprint.html">Imprint</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="wrap footer-bottom">
+      <span>Copyright ICCPP. Redesign for educational use.</span>
+      <span>English</span>
+    </div>
+  </footer>
+  <button type="button" class="feedback-launch" id="feedback-launch" aria-expanded="false" aria-controls="feedback-panel">Feedback</button>
+  <div class="feedback-layer" id="feedback-layer" hidden>
+    <div class="feedback-backdrop" data-feedback-close></div>
+    <div class="feedback-panel" id="feedback-panel" role="dialog" aria-modal="true" aria-labelledby="feedback-title">
+      <button type="button" class="feedback-close" data-feedback-close aria-label="Close">Close</button>
+      <p class="kicker">Contact</p>
+      <h2 id="feedback-title">Feedback</h2>
+      <p>Tell us how we can improve this website. Centre staff will receive your note in the inbox.</p>
+      <form class="form" data-validate data-inquiry="feedback" data-success="Thank you. Centre staff have received your feedback.">
+        <div class="form-row">
+          <label>First name <input name="first" type="text" required></label>
+          <label>Last name <input name="last" type="text" required></label>
+        </div>
+        <label>Email <input name="email" type="email" required></label>
+        <label>Message <textarea name="message" rows="4" required></textarea></label>
+        <button class="btn" type="submit">Send</button>
+        <p class="form-status" role="status"></p>
+      </form>
+    </div>
+  </div>

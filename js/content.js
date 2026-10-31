@@ -49,7 +49,7 @@
       const data = await loadJson("/api/content/members");
       const avatar = (row) => {
         if (row.photo) {
-          return `<div class="avatar has-photo"><img src="${escapeHtml(row.photo)}" alt=""></div>`;
+          return `<div class="avatar has-photo"><img src="${escapeHtml(row.photo)}" alt="" loading="lazy" decoding="async"></div>`;
         }
         return `<div class="avatar${row.alt ? " alt" : ""}" aria-hidden="true">${escapeHtml(row.initials || "")}</div>`;
       };
@@ -77,7 +77,7 @@
           .filter((row) => row.group === group)
           .map((row) => {
             const media = row.photo
-              ? `<img class="person-photo" src="${escapeHtml(row.photo)}" alt="">`
+              ? `<img class="person-photo" src="${escapeHtml(row.photo)}" alt="" loading="lazy" decoding="async">`
               : `<span class="person-fallback" aria-hidden="true">${escapeHtml((row.name || "?").replace(/[^A-Za-z]/g, "").slice(0, 2).toUpperCase() || "?")}</span>`;
             return `<div class="person-chip">${media}<div><strong>${personName(row)}</strong><span>${escapeHtml(row.role || "")}</span></div></div>`;
           })
@@ -147,6 +147,43 @@
     }
   };
 
+  const formatPaperDate = (iso) => {
+    if (!iso) return "";
+    const date = new Date(iso);
+    if (Number.isNaN(date.getTime())) return iso;
+    return date.toLocaleDateString(undefined, { year: "numeric", month: "long", day: "numeric" });
+  };
+
+  const renderAcceptedPapers = async () => {
+    const list = document.querySelector("[data-content=accepted-papers]");
+    if (!list) return;
+    try {
+      const items = await loadJson("/api/content/papers");
+      if (!items.length) {
+        list.innerHTML = "<p>Accepted papers appear here after peer review.</p>";
+        return;
+      }
+      list.innerHTML = items
+        .map((row) => {
+          const file = row.file
+            ? `<p><a class="btn" href="${escapeHtml(row.file)}" target="_blank" rel="noopener noreferrer">Read the PDF</a></p>`
+            : "";
+          const when = row.published ? `<p class="news-meta">${escapeHtml(formatPaperDate(row.published))}</p>` : "";
+          const abstract = row.abstract ? `<p>${escapeHtml(row.abstract)}</p>` : "";
+          return `<article class="card paper-item">
+            ${when}
+            <h3>${escapeHtml(row.title || "")}</h3>
+            <p>${escapeHtml(row.author || "")}</p>
+            ${abstract}
+            ${file}
+          </article>`;
+        })
+        .join("");
+    } catch {
+      /* keep static fallback */
+    }
+  };
+
   const renderJournals = async () => {
     const grid = document.querySelector("[data-content=journal-issues]");
     if (!grid) return;
@@ -160,7 +197,7 @@
           const external = !row.file;
           const extra = external ? ` target="_blank" rel="noopener noreferrer"` : "";
           const img = row.cover
-            ? `<img src="${escapeHtml(row.cover)}" alt="">`
+            ? `<img src="${escapeHtml(row.cover)}" alt="" loading="lazy" decoding="async">`
             : `<span class="issue-fallback">${escapeHtml(row.number || "")}</span>`;
           return `<a class="issue-card" href="${escapeHtml(href)}"${extra}>${img}<b>${escapeHtml(row.label || "")}</b></a>`;
         })
@@ -187,5 +224,6 @@
   renderPartners();
   renderInternships();
   renderJournals();
+  renderAcceptedPapers();
   bindDonate();
 })();

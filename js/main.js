@@ -119,6 +119,7 @@
       }
 
       const inquiryType = form.dataset.inquiry;
+      let payload = {};
       if (inquiryType) {
         const fields = {};
         new FormData(form).forEach((value, key) => {
@@ -131,7 +132,7 @@
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ type: inquiryType, fields }),
           });
-          const payload = await res.json().catch(() => ({}));
+          payload = await res.json().catch(() => ({}));
           if (!res.ok) throw new Error(payload.error || t("Could not send the form."));
         } catch (err) {
           if (status) {
@@ -143,7 +144,8 @@
       }
 
       if (status) {
-        status.textContent = t(form.dataset.success || "Thank you. Centre staff have received your message.");
+        const ref = payload && payload.id ? ` ${t("Reference:")} ${payload.id}` : "";
+        status.textContent = t(form.dataset.success || "Thank you. Centre staff have received your message.") + ref;
         status.className = "form-status ok";
       }
       form.reset();

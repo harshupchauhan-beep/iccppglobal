@@ -22,13 +22,26 @@ python3 -m venv "$APP_DIR/.venv"
 
 if [[ ! -f "$APP_DIR/.env" ]]; then
   KEY="$("$APP_DIR/.venv/bin/python" -c "import secrets; print(secrets.token_hex(32))")"
+  PASS="$("$APP_DIR/.venv/bin/python" -c "import secrets; print(secrets.token_urlsafe(18))")"
   cat > "$APP_DIR/.env" <<EOF
 ADMIN_USER=admin
-ADMIN_PASSWORD=iccpp-admin
+ADMIN_PASSWORD=$PASS
 SECRET_KEY=$KEY
 PRODUCTION=1
+DATABASE_URL=
+RAZORPAY_KEY_ID=
+RAZORPAY_KEY_SECRET=
+RAZORPAY_WEBHOOK_SECRET=
+RESEND_API_KEY=
+MAIL_FROM=
+SMTP_HOST=
+SMTP_PORT=587
+SMTP_USER=
+SMTP_PASSWORD=
 EOF
-  echo "Created $APP_DIR/.env — change ADMIN_PASSWORD before going live."
+  echo "Created $APP_DIR/.env"
+  echo "Admin password (save this): $PASS"
+  echo "Set DATABASE_URL, Razorpay keys, and mail settings in that file or in Vercel → Settings → Environment Variables."
 fi
 
 chown -R www-data:www-data "$APP_DIR"

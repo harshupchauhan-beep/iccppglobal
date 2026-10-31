@@ -10,11 +10,10 @@ import json
 import os
 import re
 import secrets
-import threading
 import urllib.error
 import urllib.request
 import uuid
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 from functools import wraps
 from pathlib import Path
 
@@ -27,6 +26,7 @@ from flask import (
     send_from_directory,
     session,
 )
+from storage import StoreLock, configure, db_error, open_blob, read_json, save_blob, using_postgres, write_json
 
 ROOT = Path(__file__).resolve().parent
 PACKAGED_DATA = ROOT / "data"
@@ -37,7 +37,7 @@ EMAIL_RE = re.compile(r"^[^\s@]+@[^\s@]+\.[^\s@]+$")
 INQUIRY_TYPES = {"newsletter", "internship", "contact", "feedback", "paper"}
 PAPER_FILE_RE = re.compile(r"^assets/papers/[A-Za-z0-9._-]+\.pdf$")
 PAPER_PDF_MAX = 4 * 1024 * 1024
-INQUIRY_STATUSES = {"new", "read", "replied"}
+INQUIRY_STATUSES = {"new", "read", "replied", "published"}
 MEMBER_GROUPS = {"management", "phd", "lecturers"}
 PHOTO_RE = re.compile(r"^assets/photos/members/[A-Za-z0-9._-]+$")
 COVER_RE = re.compile(r"^assets/photos/journals/[A-Za-z0-9._-]+$")
@@ -47,7 +47,8 @@ UPLOAD_TYPES = {".jpg": "image/jpeg", ".jpeg": "image/jpeg", ".png": "image/png"
 PDF_TYPE = {".pdf": "application/pdf"}
 UPLOAD_MAX = 2 * 1024 * 1024
 PDF_MAX = 20 * 1024 * 1024
-lock = threading.Lock()
+DEFAULT_ADMIN_PASSWORD = "iccpp-admin"
+RATE_LIMIT = 8
 
 
 def load_env() -> None:
@@ -76,8 +77,28 @@ if os.environ.get("VERCEL"):
 else:
     DATA = PACKAGED_DATA
 
+configure(ROOT, DATA, PACKAGED_DATA)
+lock = StoreLock()
+
+def production_mode() -> bool:
+    return bool(os.environ.get("VERCEL") or os.environ.get("PRODUCTION"))
+
+
+ADMIN_USER = os.environ.get("ADMIN_USER", "admin")
+ADMIN_PASSWORD = os.environ.get("ADMIN_PASSWORD") or ("" if production_mode() else DEFAULT_ADMIN_PASSWORD)
+
+
+def session_secret() -> str:
+    secret = str(os.environ.get("SECRET_KEY") or "").strip()
+    if secret:
+        return secret
+    if production_mode() and ADMIN_PASSWORD and ADMIN_PASSWORD != DEFAULT_ADMIN_PASSWORD:
+        return hashlib.sha256(f"iccpp-session:{ADMIN_PASSWORD}".encode()).hexdigest()
+    return secrets.token_hex(32)
+
+
 app = Flask(__name__, static_folder=None)
-app.secret_key = os.environ.get("SECRET_KEY") or secrets.token_hex(32)
+app.secret_key = session_secret()
 app.config["SESSION_COOKIE_HTTPONLY"] = True
 app.config["SESSION_COOKIE_SAMESITE"] = "Lax"
 app.config["SESSION_COOKIE_SECURE"] = bool(os.environ.get("VERCEL") or os.environ.get("PRODUCTION"))
@@ -86,34 +107,7 @@ if os.environ.get("VERCEL") or os.environ.get("PRODUCTION"):
 
     app.wsgi_app = ProxyFix(app.wsgi_app, x_for=1, x_proto=1, x_host=1)
 
-ADMIN_USER = os.environ.get("ADMIN_USER", "admin")
-ADMIN_PASSWORD = os.environ.get("ADMIN_PASSWORD", "iccpp-admin")
 CANONICAL_HOST = os.environ.get("CANONICAL_HOST", "iccppglobal.com")
-
-
-def data_path(name: str) -> Path:
-    return DATA / name
-
-
-def read_json(name: str, default):
-    path = data_path(name)
-    if not path.exists():
-        seed = PACKAGED_DATA / name
-        if seed.exists():
-            with seed.open(encoding="utf-8") as handle:
-                return json.load(handle)
-        return default
-    with path.open(encoding="utf-8") as handle:
-        return json.load(handle)
-
-
-def write_json(name: str, payload) -> None:
-    path = data_path(name)
-    tmp = path.with_suffix(path.suffix + ".tmp")
-    with tmp.open("w", encoding="utf-8") as handle:
-        json.dump(payload, handle, ensure_ascii=False, indent=2)
-        handle.write("\n")
-    os.replace(tmp, path)
 
 
 def new_id(prefix: str = "id") -> str:
@@ -143,12 +137,18 @@ def clean_journal_file(value) -> str:
     return path if JOURNAL_FILE_RE.match(path) else ""
 
 
+def clean_paper_file(value) -> str:
+    path = str(value or "").replace("\\", "/").lstrip("/")
+    return path if PAPER_FILE_RE.match(path) else ""
+
+
 def clean_http_url(value) -> str:
     url = str(value or "").strip()
     return url if url.startswith("https://") else ""
 
 
 def razorpay_keys() -> tuple[str, str]:
+    """Razorpay keys from .env locally, or Vercel Environment Variables in production."""
     return str(os.environ.get("RAZORPAY_KEY_ID") or "").strip(), str(os.environ.get("RAZORPAY_KEY_SECRET") or "").strip()
 
 
@@ -186,14 +186,211 @@ def save_paper_pdf(uploaded) -> str:
     if len(data) > PAPER_PDF_MAX:
         raise ValueError("PDF must be 4 MB or smaller on this form. Email the full file to iccppglobal@gmail.com with your payment id.")
     filename = f"{new_id('paper')}.pdf"
-    dest_dir = ROOT / "assets" / "papers"
-    dest_dir.mkdir(parents=True, exist_ok=True)
-    (dest_dir / filename).write_bytes(data)
-    return f"assets/papers/{filename}"
+    rel = f"assets/papers/{filename}"
+    save_blob(rel, data, "application/pdf")
+    return rel
 
 
 def now_iso() -> str:
     return datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+
+
+def client_ip() -> str:
+    forwarded = str(request.headers.get("X-Forwarded-For") or "").split(",")[0].strip()
+    return forwarded or str(request.remote_addr or "")
+
+
+def too_many_requests(ip: str) -> bool:
+    if not ip:
+        return False
+    cutoff = datetime.now(timezone.utc) - timedelta(hours=1)
+    recent = 0
+    for name in ("inquiries.json", "drafts.json"):
+        for item in read_json(name, []):
+            if not isinstance(item, dict) or item.get("ip") != ip:
+                continue
+            try:
+                created = datetime.strptime(str(item.get("created") or ""), "%Y-%m-%dT%H:%M:%SZ").replace(tzinfo=timezone.utc)
+            except ValueError:
+                continue
+            if created >= cutoff:
+                recent += 1
+    return recent >= RATE_LIMIT
+
+
+def send_notice(to: str, subject: str, body: str) -> None:
+    to = str(to or "").strip()
+    if not to:
+        return
+    mail_from = str(os.environ.get("MAIL_FROM") or "ICCPP <onboarding@resend.dev>").strip()
+    resend = str(os.environ.get("RESEND_API_KEY") or "").strip()
+    try:
+        if resend:
+            payload = json.dumps({"from": mail_from, "to": [to], "subject": subject, "text": body}).encode("utf-8")
+            req = urllib.request.Request(
+                "https://api.resend.com/emails",
+                data=payload,
+                headers={"Authorization": f"Bearer {resend}", "Content-Type": "application/json"},
+                method="POST",
+            )
+            with urllib.request.urlopen(req, timeout=12):
+                return
+        host = str(os.environ.get("SMTP_HOST") or "").strip()
+        if not host:
+            return
+        import smtplib
+        from email.message import EmailMessage
+
+        message = EmailMessage()
+        message["From"] = mail_from
+        message["To"] = to
+        message["Subject"] = subject
+        message.set_content(body)
+        port = int(os.environ.get("SMTP_PORT") or "587")
+        with smtplib.SMTP(host, port, timeout=15) as smtp:
+            smtp.starttls()
+            user = str(os.environ.get("SMTP_USER") or "").strip()
+            password = str(os.environ.get("SMTP_PASSWORD") or "").strip()
+            if user:
+                smtp.login(user, password)
+            smtp.send_message(message)
+    except (OSError, ValueError):
+        return
+
+
+def public_base() -> str:
+    return str(request.host_url or "https://iccppglobal.com/").rstrip("/")
+
+
+_HEADER = ""
+_FOOTER = ""
+_SEARCH = None
+
+
+def chrome_parts() -> tuple[str, str]:
+    global _HEADER, _FOOTER
+    if not _HEADER:
+        _HEADER = (ROOT / "partials" / "header.html").read_text(encoding="utf-8")
+        _FOOTER = (ROOT / "partials" / "footer.html").read_text(encoding="utf-8")
+    return _HEADER, _FOOTER
+
+
+def lazy_images(html: str) -> str:
+    def repl(match: re.Match) -> str:
+        tag = match.group(0)
+        if "loading=" in tag.lower():
+            return tag
+        if tag.endswith("/>"):
+            return tag[:-2] + ' loading="lazy" decoding="async" />'
+        return tag[:-1] + ' loading="lazy" decoding="async">'
+
+    return re.sub(r"<img\b[^>]*>", repl, html, flags=re.IGNORECASE)
+
+
+def decorate_html(raw: str, rel: str) -> str:
+    prefix = "../" if "/" in rel else ""
+    if 'class="site-header"' not in raw and "</main>" in raw:
+        header, footer = chrome_parts()
+        header = header.replace("__ROOT__", prefix)
+        footer = footer.replace("__ROOT__", prefix)
+        raw = raw.replace(
+            '<a class="skip-link" href="#main">Skip to content</a>',
+            '<a class="skip-link" href="#main">Skip to content</a>\n' + header,
+            1,
+        )
+        raw = raw.replace("</main>", "</main>\n" + footer, 1)
+    raw = lazy_images(raw)
+    raw = re.sub(r"js/chrome\.js\?v=\d+", "js/chrome.js?v=20", raw)
+    raw = re.sub(r"js/i18n\.js\?v=\d+", "js/i18n.js?v=14", raw)
+    raw = re.sub(r"js/main\.js\?v=\d+", "js/main.js?v=13", raw)
+    raw = re.sub(r"js/content\.js\?v=\d+", "js/content.js?v=14", raw)
+    raw = re.sub(r"js/paper\.js\?v=\d+", "js/paper.js?v=2", raw)
+    raw = re.sub(r"css/styles\.css\?v=\d+", "css/styles.css?v=22", raw)
+    return raw
+
+
+def send_html(rel: str):
+    text = (ROOT / rel).read_text(encoding="utf-8")
+    return Response(decorate_html(text, rel), mimetype="text/html; charset=utf-8")
+
+
+def search_index() -> list:
+    global _SEARCH
+    if _SEARCH is not None:
+        return _SEARCH
+    items = []
+    for path in ROOT.rglob("*.html"):
+        rel = path.relative_to(ROOT).as_posix()
+        if rel.startswith(("admin/", "partials/")):
+            continue
+        raw = path.read_text(encoding="utf-8", errors="ignore")
+        title = re.search(r"<title>(.*?)</title>", raw, flags=re.IGNORECASE | re.DOTALL)
+        desc = re.search(r'name="description"\s+content="(.*?)"', raw, flags=re.IGNORECASE | re.DOTALL)
+        heading = re.search(r"<h1>(.*?)</h1>", raw, flags=re.IGNORECASE | re.DOTALL)
+
+        def clean(value: str) -> str:
+            text = re.sub(r"<[^>]+>", " ", value or "")
+            return re.sub(r"\s+", " ", text).strip()
+
+        items.append(
+            {
+                "url": "/" if rel == "index.html" else "/" + rel,
+                "title": clean(title.group(1) if title else rel),
+                "summary": clean(desc.group(1) if desc else (heading.group(1) if heading else "")),
+            }
+        )
+    _SEARCH = items
+    return items
+
+
+def find_inquiry_by_payment(payment_id: str):
+    for item in read_json("inquiries.json", []):
+        if isinstance(item, dict) and (item.get("fields") or {}).get("payment_id") == payment_id:
+            return item
+    return None
+
+
+def promote_draft(draft: dict, payment_id: str) -> dict:
+    existing = find_inquiry_by_payment(payment_id)
+    if existing:
+        return existing
+    fields = {
+        "name": draft.get("name") or "",
+        "email": draft.get("email") or "",
+        "title": draft.get("title") or "",
+        "abstract": draft.get("abstract") or "",
+        "payment_id": payment_id,
+        "order_id": draft.get("order_id") or "",
+    }
+    if draft.get("file"):
+        fields["file"] = draft["file"]
+    record = {
+        "id": new_id("inq"),
+        "type": "paper",
+        "status": "new",
+        "created": now_iso(),
+        "ip": draft.get("ip") or "",
+        "fields": fields,
+    }
+    items = read_json("inquiries.json", [])
+    items.insert(0, record)
+    write_json("inquiries.json", items)
+    drafts = read_json("drafts.json", [])
+    for row in drafts:
+        if isinstance(row, dict) and row.get("id") == draft.get("id"):
+            row["status"] = "paid"
+            row["inquiry_id"] = record["id"]
+    write_json("drafts.json", drafts)
+    send_notice(
+        fields["email"],
+        "ICCPP received your paper",
+        (
+            f"Thank you. We received your paid submission “{fields['title']}”.\n"
+            f"Reference: {record['id']}\n"
+            f"Track the status: {public_base()}/paper-status.html\n"
+        ),
+    )
+    return record
 
 
 def login_required(view):
@@ -295,23 +492,23 @@ def public_paper_payment():
     )
 
 
-@app.post("/api/payments/paper/order")
-def create_paper_order():
+def start_razorpay_order(receipt: str, notes: dict) -> tuple[str, str]:
     key_id, secret = razorpay_keys()
-    if not key_id or not secret:
-        return jsonify({"error": "Paper payment is not configured yet."}), 503
     amount, currency, _label = paper_fee()
     payload = json.dumps(
-        {"amount": amount * 100, "currency": currency, "receipt": new_id("rcpt"), "payment_capture": 1}
+        {
+            "amount": amount * 100,
+            "currency": currency,
+            "receipt": receipt[:40],
+            "payment_capture": 1,
+            "notes": notes,
+        }
     ).encode("utf-8")
     auth = base64.b64encode(f"{key_id}:{secret}".encode("utf-8")).decode("ascii")
     req = urllib.request.Request(
         "https://api.razorpay.com/v1/orders",
         data=payload,
-        headers={
-            "Authorization": f"Basic {auth}",
-            "Content-Type": "application/json",
-        },
+        headers={"Authorization": f"Basic {auth}", "Content-Type": "application/json"},
         method="POST",
     )
     try:
@@ -319,13 +516,68 @@ def create_paper_order():
             body = json.loads(response.read().decode("utf-8"))
     except urllib.error.HTTPError as err:
         detail = err.read().decode("utf-8", errors="replace")[:240]
-        return jsonify({"error": "Could not start payment.", "detail": detail}), 502
+        return "", detail or "Could not start payment."
     except OSError:
-        return jsonify({"error": "Could not reach Razorpay."}), 502
-    order_id = str(body.get("id") or "")
+        return "", "Could not reach Razorpay."
+    return str(body.get("id") or ""), ""
+
+
+@app.post("/api/payments/paper/order")
+def create_paper_order():
+    key_id, secret = razorpay_keys()
+    if not key_id or not secret:
+        return jsonify({"error": "Paper payment is not configured yet."}), 503
+    amount, currency, _label = paper_fee()
+    order_id, detail = start_razorpay_order(new_id("rcpt"), {"purpose": "paper"})
     if not order_id:
-        return jsonify({"error": "Could not start payment."}), 502
+        return jsonify({"error": "Could not start payment.", "detail": detail}), 502
     return jsonify({"orderId": order_id, "amount": amount, "currency": currency, "keyId": key_id})
+
+
+@app.post("/api/payments/paper/draft")
+def create_paper_draft():
+    key_id, secret = razorpay_keys()
+    if not key_id or not secret:
+        return jsonify({"error": "Paper payment is not configured yet."}), 503
+    ip = client_ip()
+    if too_many_requests(ip):
+        return jsonify({"error": "Too many submissions from this network. Please try again later."}), 429
+    form = request.form
+    name = str(form.get("name") or "").strip()
+    email = str(form.get("email") or "").strip()
+    title = str(form.get("title") or "").strip()
+    abstract = str(form.get("abstract") or "").strip()
+    if not all((name, email, title, abstract)):
+        return jsonify({"error": "Please complete the required fields."}), 400
+    if not EMAIL_RE.match(email):
+        return jsonify({"error": "Please enter a valid email address."}), 400
+    try:
+        pdf_path = save_paper_pdf(request.files.get("file"))
+    except ValueError as err:
+        return jsonify({"error": str(err)}), 400
+    draft_id = new_id("draft")
+    order_id, detail = start_razorpay_order(draft_id, {"purpose": "paper", "draft_id": draft_id})
+    if not order_id:
+        return jsonify({"error": "Could not start payment.", "detail": detail}), 502
+    draft = {
+        "id": draft_id,
+        "status": "pending",
+        "created": now_iso(),
+        "ip": ip,
+        "name": name,
+        "email": email,
+        "title": title,
+        "abstract": abstract,
+        "order_id": order_id,
+    }
+    if pdf_path:
+        draft["file"] = pdf_path
+    with lock:
+        drafts = read_json("drafts.json", [])
+        drafts.insert(0, draft)
+        write_json("drafts.json", drafts)
+    amount, currency, _label = paper_fee()
+    return jsonify({"orderId": order_id, "amount": amount, "currency": currency, "keyId": key_id, "draftId": draft_id})
 
 
 @app.post("/api/payments/paper/submit")
@@ -361,18 +613,105 @@ def submit_paid_paper():
     }
     if pdf_path:
         fields["file"] = pdf_path
-    record = {
-        "id": new_id("inq"),
-        "type": "paper",
-        "status": "new",
-        "created": now_iso(),
-        "fields": fields,
-    }
     with lock:
+        existing = find_inquiry_by_payment(payment_id)
+        if existing:
+            return jsonify({"ok": True, "id": existing["id"], "file": (existing.get("fields") or {}).get("file") or ""})
+        drafts = read_json("drafts.json", [])
+        draft = next((row for row in drafts if isinstance(row, dict) and row.get("order_id") == order_id), None)
+        if isinstance(draft, dict):
+            draft["name"] = name
+            draft["email"] = email
+            draft["title"] = title
+            draft["abstract"] = abstract
+            if pdf_path:
+                draft["file"] = pdf_path
+            record = promote_draft(draft, payment_id)
+            return jsonify({"ok": True, "id": record["id"], "file": (record.get("fields") or {}).get("file") or ""})
+        record = {
+            "id": new_id("inq"),
+            "type": "paper",
+            "status": "new",
+            "created": now_iso(),
+            "ip": client_ip(),
+            "fields": fields,
+        }
         items = read_json("inquiries.json", [])
         items.insert(0, record)
         write_json("inquiries.json", items)
+    send_notice(
+        email,
+        "ICCPP received your paper",
+        (
+            f"Thank you. We received your paid submission “{title}”.\n"
+            f"Reference: {record['id']}\n"
+            f"Track the status: {public_base()}/paper-status.html\n"
+        ),
+    )
     return jsonify({"ok": True, "id": record["id"], "file": pdf_path})
+
+
+@app.post("/api/payments/razorpay/webhook")
+def razorpay_webhook():
+    secret = str(os.environ.get("RAZORPAY_WEBHOOK_SECRET") or "").strip()
+    if not secret:
+        return jsonify({"error": "Webhook secret is not configured."}), 503
+    body = request.get_data() or b""
+    signature = str(request.headers.get("X-Razorpay-Signature") or "")
+    expected = hmac.new(secret.encode("utf-8"), body, hashlib.sha256).hexdigest()
+    if not signature or not hmac.compare_digest(expected, signature):
+        return jsonify({"error": "Invalid signature."}), 400
+    try:
+        event = json.loads(body.decode("utf-8") or "{}")
+    except json.JSONDecodeError:
+        return jsonify({"error": "Invalid payload."}), 400
+    if event.get("event") != "payment.captured":
+        return jsonify({"ok": True})
+    payment = ((event.get("payload") or {}).get("payment") or {}).get("entity") or {}
+    payment_id = str(payment.get("id") or "")
+    order_id = str(payment.get("order_id") or "")
+    if not payment_id or not order_id:
+        return jsonify({"ok": True})
+    with lock:
+        if find_inquiry_by_payment(payment_id):
+            return jsonify({"ok": True})
+        drafts = read_json("drafts.json", [])
+        draft = next((row for row in drafts if isinstance(row, dict) and row.get("order_id") == order_id), None)
+        if isinstance(draft, dict):
+            promote_draft(draft, payment_id)
+    return jsonify({"ok": True})
+
+
+@app.post("/api/payments/paper/status")
+def paper_status():
+    payload = request.get_json(silent=True) or {}
+    item_id = str(payload.get("id") or "").strip()
+    email = str(payload.get("email") or "").strip().lower()
+    if not item_id or not EMAIL_RE.match(email):
+        return jsonify({"error": "Enter the reference and the email used on the form."}), 400
+    labels = {"new": "Received", "read": "In review", "replied": "In review", "published": "Published"}
+    for item in read_json("inquiries.json", []):
+        if not isinstance(item, dict) or item.get("id") != item_id or item.get("type") != "paper":
+            continue
+        fields = item.get("fields") or {}
+        if str(fields.get("email") or "").strip().lower() != email:
+            break
+        return jsonify({"ok": True, "status": labels.get(item.get("status"), "Received"), "title": fields.get("title") or ""})
+    return jsonify({"error": "No submission matches that reference and email."}), 404
+
+
+@app.get("/api/search")
+def public_search():
+    query = request.args.get("q", "").strip().lower()
+    if len(query) < 2:
+        return jsonify([])
+    hits = []
+    for item in search_index():
+        if query in f"{item['title']} {item['summary']}".lower():
+            hits.append(item)
+        if len(hits) >= 20:
+            break
+    return jsonify(hits)
 
 
 @app.get("/api/content/journals")
@@ -396,6 +735,30 @@ def public_journals():
             item["file"] = file_path
         issues.append(item)
     return jsonify({"issues": issues})
+
+
+@app.get("/api/content/papers")
+def public_papers():
+    items = []
+    for row in read_json("papers.json", []):
+        if not isinstance(row, dict) or not row.get("visible", True):
+            continue
+        title = str(row.get("title") or "").strip()
+        author = str(row.get("author") or "").strip()
+        if not title or not author:
+            continue
+        item = {
+            "id": row.get("id") or "",
+            "title": title,
+            "author": author,
+            "abstract": str(row.get("abstract") or "").strip(),
+            "published": str(row.get("published") or "").strip(),
+        }
+        file_path = clean_paper_file(row.get("file"))
+        if file_path:
+            item["file"] = file_path
+        items.append(item)
+    return jsonify(items)
 
 
 @app.post("/api/inquiries")
@@ -424,17 +787,28 @@ def create_inquiry():
     if missing:
         return jsonify({"error": "Please complete the required fields."}), 400
 
+    ip = client_ip()
+    if too_many_requests(ip):
+        return jsonify({"error": "Too many submissions from this network. Please try again later."}), 429
+
     record = {
         "id": new_id("inq"),
         "type": kind,
         "status": "new",
         "created": now_iso(),
+        "ip": ip,
         "fields": cleaned,
     }
     with lock:
         items = read_json("inquiries.json", [])
         items.insert(0, record)
         write_json("inquiries.json", items)
+    kind_label = {"newsletter": "newsletter request", "internship": "internship application", "contact": "message", "feedback": "feedback"}.get(kind, "message")
+    send_notice(
+        email,
+        f"ICCPP received your {kind_label}",
+        f"Thank you. Centre staff have received your {kind_label}.\nReference: {record['id']}\n",
+    )
     return jsonify({"ok": True, "id": record["id"]})
 
 
@@ -446,6 +820,10 @@ def admin_login():
     payload = request.get_json(silent=True) or {}
     user = str(payload.get("user") or "")
     password = str(payload.get("password") or "")
+    if production_mode() and ADMIN_PASSWORD in ("", DEFAULT_ADMIN_PASSWORD):
+        return jsonify({"error": "Set ADMIN_PASSWORD and SECRET_KEY in the hosting environment before signing in."}), 503
+    if not ADMIN_PASSWORD:
+        return jsonify({"error": "Set ADMIN_PASSWORD before signing in."}), 503
     user_ok = hmac.compare_digest(user.encode("utf-8"), ADMIN_USER.encode("utf-8")) if len(user) == len(ADMIN_USER) else False
     pass_ok = hmac.compare_digest(password.encode("utf-8"), ADMIN_PASSWORD.encode("utf-8")) if len(password) == len(ADMIN_PASSWORD) else False
     if user_ok and pass_ok:
@@ -478,7 +856,17 @@ def admin_stats():
             counts[kind] += 1
         if item.get("status") == "new":
             new_count += 1
-    return jsonify({"total": len(items), "new": new_count, "byType": counts, "recent": items[:8]})
+    return jsonify(
+        {
+            "total": len(items),
+            "new": new_count,
+            "byType": counts,
+            "recent": items[:8],
+            "storage": "postgres" if using_postgres() else "files",
+            "storageError": db_error(),
+            "production": production_mode(),
+        }
+    )
 
 
 @app.get("/api/admin/inquiries")
@@ -528,6 +916,53 @@ def admin_inquiry_delete(item_id: str):
             return jsonify({"error": "Not found."}), 404
         write_json("inquiries.json", next_items)
     return jsonify({"ok": True})
+
+
+@app.post("/api/admin/inquiries/<item_id>/publish")
+@login_required
+def admin_inquiry_publish(item_id: str):
+    with lock:
+        items = read_json("inquiries.json", [])
+        found = None
+        for item in items:
+            if item.get("id") == item_id:
+                found = item
+                break
+        if not found:
+            return jsonify({"error": "Not found."}), 404
+        if found.get("type") != "paper":
+            return jsonify({"error": "Only paid paper submissions can be published."}), 400
+        fields = found.get("fields") or {}
+        title = str(fields.get("title") or "").strip()
+        author = str(fields.get("name") or "").strip()
+        abstract = str(fields.get("abstract") or "").strip()
+        if not title or not author:
+            return jsonify({"error": "This submission is missing a title or author."}), 400
+        papers = read_json("papers.json", [])
+        if not isinstance(papers, list):
+            papers = []
+        for paper in papers:
+            if isinstance(paper, dict) and paper.get("inquiryId") == item_id:
+                found["status"] = "published"
+                write_json("inquiries.json", items)
+                return jsonify({"ok": True, "paper": paper, "inquiry": found})
+        paper = {
+            "id": new_id("paper"),
+            "inquiryId": item_id,
+            "title": title,
+            "author": author,
+            "abstract": abstract,
+            "published": now_iso(),
+            "visible": True,
+        }
+        file_path = clean_paper_file(fields.get("file"))
+        if file_path:
+            paper["file"] = file_path
+        papers.insert(0, paper)
+        write_json("papers.json", papers)
+        found["status"] = "published"
+        write_json("inquiries.json", items)
+    return jsonify({"ok": True, "paper": paper, "inquiry": found})
 
 
 @app.get("/api/admin/inquiries.csv")
@@ -681,10 +1116,9 @@ def admin_upload():
         if not data:
             return jsonify({"error": "Please choose a PDF."}), 400
         filename = f"{new_id('jf')}.pdf"
-        dest_dir = ROOT / "assets" / "journals"
-        dest_dir.mkdir(parents=True, exist_ok=True)
-        (dest_dir / filename).write_bytes(data)
-        return jsonify({"path": f"assets/journals/{filename}"})
+        rel = f"assets/journals/{filename}"
+        save_blob(rel, data, "application/pdf")
+        return jsonify({"path": rel})
     if ext not in UPLOAD_TYPES:
         return jsonify({"error": "Please upload a JPG, PNG, or WebP image."}), 400
     data = uploaded.read(UPLOAD_MAX + 1)
@@ -693,15 +1127,13 @@ def admin_upload():
     if not data:
         return jsonify({"error": "Please choose an image."}), 400
     filename = f"{new_id('p')}{'.jpg' if ext == '.jpeg' else ext}"
+    content_type = UPLOAD_TYPES[ext]
     if kind == "journal-cover":
-        dest_dir = ROOT / "assets" / "photos" / "journals"
-        dest_dir.mkdir(parents=True, exist_ok=True)
-        (dest_dir / filename).write_bytes(data)
-        return jsonify({"path": f"assets/photos/journals/{filename}"})
-    dest_dir = ROOT / "assets" / "photos" / "members"
-    dest_dir.mkdir(parents=True, exist_ok=True)
-    (dest_dir / filename).write_bytes(data)
-    return jsonify({"path": f"assets/photos/members/{filename}"})
+        rel = f"assets/photos/journals/{filename}"
+    else:
+        rel = f"assets/photos/members/{filename}"
+    save_blob(rel, data, content_type)
+    return jsonify({"path": rel})
 
 
 @app.get("/api/admin/partners")
@@ -829,7 +1261,7 @@ def admin_file(filename: str):
 
 @app.get("/")
 def root():
-    return send_from_directory(ROOT, "index.html")
+    return send_html("index.html")
 
 
 @app.get("/<path:path>")
@@ -841,16 +1273,31 @@ def public_file(path: str):
     if not target.resolve().is_relative_to(ROOT.resolve()):
         return ("Not found", 404)
     if target.is_file():
+        if target.suffix.lower() == ".html":
+            return send_html(target.relative_to(ROOT).as_posix())
         return send_from_directory(ROOT, path)
+    blob = open_blob(path)
+    if blob:
+        return Response(blob[0], mimetype=blob[1])
     if (ROOT / path / "index.html").is_file():
-        return send_from_directory(ROOT / path, "index.html")
+        return send_html(f"{path}/index.html")
     return ("Not found", 404)
 
 
 @app.after_request
-def no_store_api(response):
+def cache_headers(response):
     if request.path.startswith("/api/"):
         response.headers["Cache-Control"] = "no-store"
+        return response
+    ext = Path(request.path).suffix.lower()
+    static = {".css", ".js", ".png", ".jpg", ".jpeg", ".webp", ".gif", ".svg", ".ico", ".pdf", ".woff2"}
+    if ext in static:
+        if request.args.get("v"):
+            response.headers["Cache-Control"] = "public, max-age=31536000, immutable"
+        else:
+            response.headers["Cache-Control"] = "public, max-age=86400"
+    elif ext == ".html" or request.path in ("/", ""):
+        response.headers["Cache-Control"] = "public, max-age=120"
     return response
 
 

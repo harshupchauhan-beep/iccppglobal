@@ -65,7 +65,7 @@
     if (payBtn) payBtn.disabled = true;
     setStatus(t("Starting payment…"));
     try {
-      const orderRes = await fetch("/api/payments/paper/order", { method: "POST" });
+      const orderRes = await fetch("/api/payments/paper/draft", { method: "POST", body: new FormData(form) });
       const order = await orderRes.json().catch(() => ({}));
       if (!orderRes.ok) throw new Error(order.error || t("Could not start payment."));
       if (typeof Razorpay !== "function") throw new Error(t("Could not load Razorpay checkout."));
@@ -83,7 +83,8 @@
             const extra = saved.file
               ? t("Thank you. Centre staff have received your paid submission.")
               : t("Thank you. Centre staff have received your paid submission. Email the full PDF to iccppglobal@gmail.com with your payment id.");
-            setStatus(extra, "ok");
+            const ref = saved.id ? ` ${t("Reference:")} ${saved.id}` : "";
+            setStatus(extra + ref, "ok");
             form.reset();
           } catch (err) {
             setStatus(t(err.message || "Could not send the form."), "error");

@@ -11,6 +11,7 @@
         <div class="header-bar-links">
           <a href="tel:+918130673015">+91 81306 73015</a>
           <a href="mailto:iccppglobal@gmail.com">iccppglobal@gmail.com</a>
+          <a href="${r}search.html">Search</a>
           <div class="lang-switch" role="group" aria-label="Language">
             <button type="button" class="lang-btn" data-lang="en" aria-label="Switch to English" title="English">
               <svg viewBox="0 0 60 30" aria-hidden="true" focusable="false">
@@ -35,7 +36,7 @@
     </div>
     <div class="wrap header-main">
       <a class="brand" href="${r}index.html">
-        <img src="${r}assets/photos/logo-psi.png" alt="ICCPP">
+        <img src="${r}assets/photos/logo-psi.png" alt="ICCPP" loading="eager" decoding="async">
         <span class="brand-text">
           <strong>ICCPP</strong>
           <span>International Centre for Clinical Psychology and Psychotherapy</span>
@@ -181,25 +182,37 @@
     </div>
   </div>`;
 
-  const skip = document.querySelector(".skip-link");
-  const main = document.querySelector("main");
-  const headerNode = document.createRange().createContextualFragment(header);
-  const footerNode = document.createRange().createContextualFragment(footer);
-
-  if (skip && skip.nextSibling) {
-    skip.parentNode.insertBefore(headerNode, skip.nextSibling);
-  } else {
-    document.body.insertBefore(headerNode, document.body.firstChild);
+  if (!document.querySelector(".site-header")) {
+    const skip = document.querySelector(".skip-link");
+    const main = document.querySelector("main");
+    const headerNode = document.createRange().createContextualFragment(header);
+    const footerNode = document.createRange().createContextualFragment(footer);
+    if (skip && skip.nextSibling) {
+      skip.parentNode.insertBefore(headerNode, skip.nextSibling);
+    } else {
+      document.body.insertBefore(headerNode, document.body.firstChild);
+    }
+    if (main && main.nextSibling) {
+      main.parentNode.insertBefore(footerNode, main.nextSibling);
+    } else {
+      document.body.appendChild(footerNode);
+    }
   }
 
-  if (main && main.nextSibling) {
-    main.parentNode.insertBefore(footerNode, main.nextSibling);
+  const wantGerman = localStorage.getItem("iccpp-lang") === "de";
+  if (wantGerman) {
+    const i18n = document.createElement("script");
+    i18n.src = `${r}js/i18n.js?v=14`;
+    i18n.async = false;
+    document.body.appendChild(i18n);
   } else {
-    document.body.appendChild(footerNode);
+    document.querySelectorAll(".lang-btn").forEach((btn) => {
+      btn.setAttribute("aria-pressed", String(btn.dataset.lang === "en"));
+      btn.addEventListener("click", () => {
+        if (btn.dataset.lang !== "de") return;
+        localStorage.setItem("iccpp-lang", "de");
+        location.reload();
+      });
+    });
   }
-
-  const i18n = document.createElement("script");
-  i18n.src = `${r}js/i18n.js?v=12`;
-  i18n.async = false;
-  document.body.appendChild(i18n);
 })();

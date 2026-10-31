@@ -258,6 +258,11 @@ th {
   color: var(--red);
 }
 
+.badge.published {
+  background: #d7e4d4;
+  color: var(--navy);
+}
+
 .btn {
   display: inline-block;
   border: 0;

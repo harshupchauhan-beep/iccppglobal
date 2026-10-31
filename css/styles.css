@@ -1431,6 +1431,36 @@ select:focus,
   font-size: 2rem;
 }
 
+.paper-list {
+  display: grid;
+  gap: 1.1rem;
+}
+
+.paper-item h3 {
+  margin-bottom: 0.35rem;
+}
+
+.search-results {
+  display: grid;
+  gap: 0.8rem;
+}
+
+.search-hit {
+  display: block;
+  padding: 1rem 1.1rem;
+  border: 1px solid var(--line);
+  background: var(--paper);
+  text-decoration: none;
+  color: inherit;
+}
+
+.search-hit strong {
+  display: block;
+  font-family: var(--serif);
+  font-size: 1.2rem;
+  margin-bottom: 0.25rem;
+}
+
 .person-list {
   display: grid;
   grid-template-columns: repeat(3, 1fr);

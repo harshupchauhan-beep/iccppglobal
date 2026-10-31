@@ -64,7 +64,14 @@
         </tr>`
       )
       .join("");
+    const storageNote =
+      stats.production && stats.storage !== "postgres"
+        ? `<div class="panel"><p>Submissions are stored on this server’s temporary disk. Set DATABASE_URL to a Postgres database so they survive restarts and stay available when many people use the site at once.${
+            stats.storageError ? ` ${escapeHtml(stats.storageError)}` : ""
+          }</p></div>`
+        : "";
     view.innerHTML = `
+      ${storageNote}
       <div class="stats">
         <div class="stat"><b>${stats.new}</b><span>New messages</span></div>
         <div class="stat"><b>${stats.byType?.internship || 0}</b><span>Internship applications</span></div>
@@ -98,7 +105,17 @@
       <div class="panel detail" data-detail="${escapeHtml(item.id)}">
         <p><span class="badge ${item.status}">${escapeHtml(item.status)}</span> ${escapeHtml(item.type)} · ${escapeHtml(formatWhen(item.created))}</p>
         ${lines}
+        ${
+          item.type === "paper" && item.status === "published"
+            ? `<p class="muted">Published on the journal page.</p>`
+            : ""
+        }
         <div class="row-actions">
+          ${
+            item.type === "paper" && item.status !== "published"
+              ? `<button class="btn btn-small" data-publish>Publish on journal</button>`
+              : ""
+          }
           <button class="btn btn-small" data-status="read">Mark read</button>
           <button class="btn btn-small" data-status="replied">Mark replied</button>
           <button class="btn btn-small btn-ghost" data-status="new">Mark new</button>
@@ -126,6 +143,7 @@
           <option value="new">New</option>
           <option value="read">Read</option>
           <option value="replied">Replied</option>
+          <option value="published">Published</option>
         </select>
         <input id="filter-q" type="search" placeholder="Search name, email, message">
         <a class="btn btn-ghost" href="/api/admin/inquiries.csv">Export CSV</a>
@@ -160,6 +178,9 @@
         if (event.target.matches("[data-delete]")) {
           if (!confirm("Delete this submission?")) return;
           await api(`/api/admin/inquiries/${id}`, { method: "DELETE" });
+        } else if (event.target.matches("[data-publish]")) {
+          if (!confirm("Publish this paper on the journal page?")) return;
+          await api(`/api/admin/inquiries/${id}/publish`, { method: "POST", body: "{}" });
         } else if (event.target.dataset.status) {
           await api(`/api/admin/inquiries/${id}`, {
             method: "PATCH",
